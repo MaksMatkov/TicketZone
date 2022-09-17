@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiketsTerminal.DAL", "..\Ti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiketsTerminal.BLL", "..\TiketsTerminal.BLL\TiketsTerminal.BLL.csproj", "{ACF92154-7F7A-471B-B1E1-8F60D5F72DD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiketsTerminal.APP", "..\TiketsTerminal.APP\TiketsTerminal.APP.csproj", "{7BECED94-1D88-4E86-B5F9-7E524ED43CBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{ACF92154-7F7A-471B-B1E1-8F60D5F72DD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACF92154-7F7A-471B-B1E1-8F60D5F72DD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACF92154-7F7A-471B-B1E1-8F60D5F72DD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BECED94-1D88-4E86-B5F9-7E524ED43CBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BECED94-1D88-4E86-B5F9-7E524ED43CBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BECED94-1D88-4E86-B5F9-7E524ED43CBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BECED94-1D88-4E86-B5F9-7E524ED43CBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

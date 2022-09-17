@@ -10,21 +10,19 @@ namespace TiketsTerminal.Domain.Models
     public class FilmViewingTime
     {
         public FilmViewingTime() { }
-        public FilmViewingTime(Film film, DateValidator date,  Room room, int id = 0)
+        public FilmViewingTime(DateValidator date,  Room room, int id = 0)
         {
-            if (film == null)
-                throw new ArgumentNullException(nameof(film));
+            //if (film == null)
+            //    throw new ArgumentNullException(nameof(film));
             if (date == null)
                 throw new ArgumentNullException(nameof(date));
             if (room == null)
                 throw new ArgumentNullException(nameof(room));
 
-            ID = id;
-            FK_Film = film.ID;
+            ID = id;            
             Date = date.Value;
             FK_Room = room.ID;
 
-            Film = film;
             Room = room;
         }
 

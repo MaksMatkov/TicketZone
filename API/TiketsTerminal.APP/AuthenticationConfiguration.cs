@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace TiketsTerminal.API
+namespace TiketsTerminal.APP
 {
     public class AuthenticationConfiguration
     {

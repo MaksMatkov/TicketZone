@@ -10,37 +10,37 @@ using TiketsTerminal.Domain.Models;
 
 namespace TiketsTerminal.DAL.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class FilmRepository : IFilmRepository
     {
         DBContext db;
-        public UserRepository(DBContext _db) { this.db = _db; }
-
-        public User Get(int id)
+        public FilmRepository(DBContext _db) { this.db = _db; }
+       
+        public Film Get(int id)
         {
-            return db.User.FirstOrDefault(el => el.ID == id);
+            return db.Film.Where(el => el.ID == id).FirstOrDefault();
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<Film> GetAll()
         {
-            return db.User;
+            return db.Film;
         }
 
-        public void Save(User item)
+        public void Save(Film item)
         {
             try
             {
                 if (item.ID > 0)
                     db.Entry(item).State = EntityState.Modified;
                 else
-                    db.User.Add(item);
+                    db.Film.Add(item);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
         }
 
-        public void Delete(User item)
+        public void Delete(Film item)
         {
             if (item.ID > 0)
             {
@@ -50,14 +50,10 @@ namespace TiketsTerminal.DAL.Repositories
                 }
                 catch (Exception ex)
                 {
-                   
+
                 }
             }
         }
 
-        public User GetForAuthenticate(string email, string password)
-        {
-            return db.User.Where(el => el.Email == email && el.Password == password).FirstOrDefault();
-        }
     }
 }

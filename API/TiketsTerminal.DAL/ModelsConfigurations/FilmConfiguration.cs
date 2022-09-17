@@ -31,6 +31,9 @@ namespace TiketsTerminal.DAL.ModelsConfigurations
             builder.Property(p => p.TrailerUrl)
                .HasColumnName("Trailer_Url")
                .IsRequired();
+            builder.Property(p => p.PosterUrl)
+               .HasColumnName("Poster_Url")
+               .IsRequired();
         }
     }
 }

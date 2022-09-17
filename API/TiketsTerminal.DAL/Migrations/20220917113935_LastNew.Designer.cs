@@ -9,8 +9,8 @@ using TiketsTerminal.DAL.Infrastructure;
 namespace TiketsTerminal.DAL.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20220915120704_Last")]
-    partial class Last
+    [Migration("20220917113935_LastNew")]
+    partial class LastNew
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,6 +34,11 @@ namespace TiketsTerminal.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("Name");
+
+                    b.Property<string>("PosterUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Poster_Url");
 
                     b.Property<string>("TrailerUrl")
                         .IsRequired()
@@ -65,6 +70,10 @@ namespace TiketsTerminal.DAL.Migrations
                         .HasColumnName("FK_Room");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("FK_Film");
+
+                    b.HasIndex("FK_Room");
 
                     b.ToTable("T_Film_Viewing_Time", "fbd");
                 });
@@ -110,6 +119,10 @@ namespace TiketsTerminal.DAL.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("FK_Film_Viewing_Time");
+
+                    b.HasIndex("FK_User");
+
                     b.ToTable("T_Ticket_Order", "fbd");
                 });
 
@@ -142,6 +155,74 @@ namespace TiketsTerminal.DAL.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("T_User", "fbd");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Email = "admin@admin.admin",
+                            FK_Role = 2,
+                            Name = "ADMIN",
+                            Password = "admin"
+                        });
+                });
+
+            modelBuilder.Entity("TiketsTerminal.Domain.Models.FilmViewingTime", b =>
+                {
+                    b.HasOne("TiketsTerminal.Domain.Models.Film", "Film")
+                        .WithMany("FilmViewingTimes")
+                        .HasForeignKey("FK_Film")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TiketsTerminal.Domain.Models.Room", "Room")
+                        .WithMany("FilmViewingTimes")
+                        .HasForeignKey("FK_Room")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Film");
+
+                    b.Navigation("Room");
+                });
+
+            modelBuilder.Entity("TiketsTerminal.Domain.Models.TicketOrder", b =>
+                {
+                    b.HasOne("TiketsTerminal.Domain.Models.FilmViewingTime", "FilmViewingTime")
+                        .WithMany("TicketOrders")
+                        .HasForeignKey("FK_Film_Viewing_Time")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TiketsTerminal.Domain.Models.User", "User")
+                        .WithMany("TicketOrders")
+                        .HasForeignKey("FK_User")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FilmViewingTime");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TiketsTerminal.Domain.Models.Film", b =>
+                {
+                    b.Navigation("FilmViewingTimes");
+                });
+
+            modelBuilder.Entity("TiketsTerminal.Domain.Models.FilmViewingTime", b =>
+                {
+                    b.Navigation("TicketOrders");
+                });
+
+            modelBuilder.Entity("TiketsTerminal.Domain.Models.Room", b =>
+                {
+                    b.Navigation("FilmViewingTimes");
+                });
+
+            modelBuilder.Entity("TiketsTerminal.Domain.Models.User", b =>
+                {
+                    b.Navigation("TicketOrders");
                 });
 #pragma warning restore 612, 618
         }

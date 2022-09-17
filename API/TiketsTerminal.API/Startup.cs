@@ -9,11 +9,17 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using ProjectBerloga.APP.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TiketsTerminal.API.Infrastructure;
+using TiketsTerminal.APP;
+using TiketsTerminal.APP.Interfaces;
+using TiketsTerminal.Bll.Interfaces;
+using TiketsTerminal.BLL.Interfaces;
+using TiketsTerminal.BLL.Services;
 using TiketsTerminal.DAL.Infrastructure;
 using TiketsTerminal.DAL.Repositories;
 using TiketsTerminal.Domain.Interfaces;
@@ -95,7 +101,6 @@ namespace TiketsTerminal.API
         private void SetupDependencyInjection(IServiceCollection services)
         {
             var connectionStrings = Configuration.GetSection("ConnectionStrings").Get<ConnectionStringsConfiguration>();
-            services.AddSingleton(connectionStrings);
 
             services.AddDbContext<DBContext>(o =>
             {
@@ -109,13 +114,21 @@ namespace TiketsTerminal.API
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-
             //add di
             services.AddSingleton<DBContext>();
+            services.AddSingleton(connectionStrings);
             services.AddScoped<UnitOfWork>();
+
+            //repo
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<IFilmRepository, FilmRepository>();
 
-
+            //serv
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IRoomService, RoomService>();
+            services.AddScoped<IFilmService, FilmService>();
 
         }
 
@@ -133,7 +146,7 @@ namespace TiketsTerminal.API
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

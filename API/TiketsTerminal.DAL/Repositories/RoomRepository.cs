@@ -10,37 +10,36 @@ using TiketsTerminal.Domain.Models;
 
 namespace TiketsTerminal.DAL.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class RoomRepository : IRoomRepository
     {
         DBContext db;
-        public UserRepository(DBContext _db) { this.db = _db; }
-
-        public User Get(int id)
+        public RoomRepository(DBContext _db) { this.db = _db; }
+        public Room Get(int id)
         {
-            return db.User.FirstOrDefault(el => el.ID == id);
+            return db.Room.Where(el => el.ID == id).FirstOrDefault();
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<Room> GetAll()
         {
-            return db.User;
+            return db.Room;
         }
 
-        public void Save(User item)
+        public void Save(Room item)
         {
             try
             {
                 if (item.ID > 0)
                     db.Entry(item).State = EntityState.Modified;
                 else
-                    db.User.Add(item);
+                    db.Room.Add(item);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
         }
 
-        public void Delete(User item)
+        public void Delete(Room item)
         {
             if (item.ID > 0)
             {
@@ -50,14 +49,9 @@ namespace TiketsTerminal.DAL.Repositories
                 }
                 catch (Exception ex)
                 {
-                   
+
                 }
             }
-        }
-
-        public User GetForAuthenticate(string email, string password)
-        {
-            return db.User.Where(el => el.Email == email && el.Password == password).FirstOrDefault();
         }
     }
 }

@@ -16,5 +16,7 @@ namespace TiketsTerminal.Domain.Interfaces
         public void Save(User item);
     
         public void Delete(User item);
+
+        public User GetForAuthenticate(string email, string password);
     }
 }

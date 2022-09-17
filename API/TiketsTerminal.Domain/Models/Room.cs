@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TiketsTerminal.Domain.Models
 {
@@ -11,6 +13,15 @@ namespace TiketsTerminal.Domain.Models
             Number = number;
             SeatsCount = seatsCount;
         }
+
+        //public int GetFreeSeatsCount(int FilmViewingTimeId)
+        //{
+        //    var FilmViewingTime = FilmViewingTimes.Where(el => el.ID == FilmViewingTimeId).FirstOrDefault();
+        //    if(FilmViewingTime == null)
+        //        throw new ArgumentException("Film Viewing Time is Not Valid!");
+
+        //    return FilmViewingTime.TicketOrders != null ? SeatsCount - FilmViewingTime.TicketOrders.Count : SeatsCount;
+        //}
 
         public int  ID { get; private set; }
         public int  Number { get; private set; }

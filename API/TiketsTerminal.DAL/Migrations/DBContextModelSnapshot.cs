@@ -33,6 +33,11 @@ namespace TiketsTerminal.DAL.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("Name");
 
+                    b.Property<string>("PosterUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Poster_Url");
+
                     b.Property<string>("TrailerUrl")
                         .IsRequired()
                         .HasColumnType("TEXT")

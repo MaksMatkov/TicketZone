@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TiketsTerminal.APP\TiketsTerminal.APP.csproj" />
     <ProjectReference Include="..\TiketsTerminal.BLL\TiketsTerminal.BLL.csproj" />
     <ProjectReference Include="..\TiketsTerminal.DAL\TiketsTerminal.DAL.csproj" />
     <ProjectReference Include="..\TiketsTerminal.Domain\TiketsTerminal.Domain.csproj" />
