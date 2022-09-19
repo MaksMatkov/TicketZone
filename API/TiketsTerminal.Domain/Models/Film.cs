@@ -44,6 +44,6 @@ namespace TiketsTerminal.Domain.Models
         public string TrailerUrl { get; private set; }
         public string PosterUrl { get; private set; }
 
-        public List<FilmViewingTime> FilmViewingTimes { get; private set; }
+        public List<FilmViewingTime> FilmViewingTimes { get; private set; } = new List<FilmViewingTime>();
     }
 }

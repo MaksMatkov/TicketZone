@@ -30,6 +30,18 @@ namespace TiketsTerminal.API.Infrastructure
                 .ForMember("ID", el => el.MapFrom(v => v.ID))
                 .ForMember("Number", el => el.MapFrom(v => v.Number))
                 .ForMember("SeatsCount", el => el.MapFrom(v => v.SeatsCount)).ReverseMap();
+
+            CreateMap<FilmViewingTime, ViewingTimeModel>()
+                .ForMember("ID", el => el.MapFrom(v => v.ID))
+                .ForMember("Date", el => el.MapFrom(v => v.Date))
+                .ForMember("FK_Room", el => el.MapFrom(v => v.FK_Room))
+                .ForMember("FK_Film", el => el.MapFrom(v => v.FK_Film)).ReverseMap();
+
+            CreateMap<TicketOrder, TicketOrderViewModel>()
+                .ForMember("ID", el => el.MapFrom(v => v.ID))
+                .ForMember("FK_Film_Viewing_Time", el => el.MapFrom(v => v.FK_Film_Viewing_Time))
+                .ForMember("FK_User", el => el.MapFrom(v => v.FK_User))
+                .ForMember("CreationDate", el => el.MapFrom(v => v.CreationDate)).ReverseMap();
         }
     }
 }

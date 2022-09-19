@@ -31,7 +31,7 @@ namespace TiketsTerminal.Domain.Models
         public int FK_User { get; private set; }
         public int FK_Film_Viewing_Time { get; private set; }
         public DateTime CreationDate { get; private set; }
-        public User User { get; private set; }
-        public FilmViewingTime FilmViewingTime { get; private set; }
+        public User User { get; private set; } = new User();
+        public FilmViewingTime FilmViewingTime { get; private set; } = new FilmViewingTime();
     }
 }

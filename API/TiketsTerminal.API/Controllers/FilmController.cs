@@ -35,18 +35,13 @@ namespace TiketsTerminal.API.Controllers
 
             try
             {
-                var users = FilmService.GetAll();
-                if(users != null)
-                {
-                    data = mapper.Map<List<FilmViewModel>>(users);
-                }
+                data = FilmService.GetAll();
+                return Ok(data);
             }
             catch (Exception ex)
             {
                 return ValidationProblem(ex.Message);
             }
-
-            return Ok(data);
         }
 
         [HttpGet]
@@ -86,6 +81,30 @@ namespace TiketsTerminal.API.Controllers
             try
             {
                 FilmService.SetViewingTime(model);
+            }
+            catch
+            {
+
+            }
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Client")]
+        [Route("SetViewingTime")]
+        public ActionResult SetTicketOrder(TicketOrderViewModel model)
+        {
+            var userID = 0;
+            string userIdstr = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+            Int32.TryParse(userIdstr, out userID);
+
+            if (userID == 0)
+                return Unauthorized();
+
+            try
+            {
+                FilmService.SetTicketOrder(model);
             }
             catch
             {

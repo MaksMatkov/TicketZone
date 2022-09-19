@@ -18,6 +18,7 @@ namespace TiketsTerminal.BLL.Interfaces
         public void Delete(FilmViewModel item);
 
         public void SetViewingTime(ViewingTimeModel ViewingTimeModel);
+        public void SetTicketOrder(TicketOrderViewModel TicketOrderViewModel);
 
         public void DeleteViewingTime(int id);
     }

@@ -68,5 +68,26 @@ namespace TiketsTerminal.BLL.Services
         {
             throw new NotImplementedException();
         }
+
+        public void SetTicketOrder(TicketOrderViewModel TicketOrderViewModel)
+        {
+            var user = uow.UserRepository.Get(TicketOrderViewModel.FK_User);
+            if (user == null)
+                throw new ArgumentException("User is missing");
+            var film = uow.FilmRepository.Get(TicketOrderViewModel.FK_Film);
+            if (film == null)
+                throw new ArgumentException("Film is missing");
+            var viewingTime = film.FilmViewingTimes.Where(el => el.ID == TicketOrderViewModel.FK_Film_Viewing_Time).FirstOrDefault();
+            if(viewingTime == null)
+                throw new ArgumentException("Viewing Time is missing");
+            if(viewingTime.Room == null || viewingTime.Room.ID == 0)
+                throw new ArgumentException("Room is missing");
+
+
+            var order = new TicketOrder(user, viewingTime, new DateValidator(TicketOrderViewModel.CreationDate));
+            viewingTime.TicketOrders.Add(order);
+
+            uow.SaveChnages();
+        }
     }
 }

@@ -19,6 +19,5 @@ namespace TiketsTerminal.Bll.Interfaces
         public void Delete(UserViewModel item);
         public UserViewModel GetForAuthenticate(string email, string password);
         void RegisterNewUser(UserViewModel user);
-        void RegisterNewAdmin(UserViewModel user);
     }
 }

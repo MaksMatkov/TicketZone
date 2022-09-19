@@ -31,7 +31,7 @@ namespace TiketsTerminal.Domain.Models
         public DateTime Date { get; private set; }
         public int FK_Room { get; private set; }
         public Film Film { get; private set; }
-        public Room Room { get; private set; }
-        public List<TicketOrder> TicketOrders { get; private set; }
+        public Room Room { get; private set; } = new Room();
+        public List<TicketOrder> TicketOrders { get; private set; } = new List<TicketOrder>();
     }
 }
