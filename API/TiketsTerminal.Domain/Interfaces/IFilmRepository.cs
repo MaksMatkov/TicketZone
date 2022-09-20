@@ -13,8 +13,5 @@ namespace TiketsTerminal.Domain.Interfaces
 
         public IEnumerable<Film> GetAll();
 
-        public void Save(Film item);
-    
-        public void Delete(Film item);
     }
 }

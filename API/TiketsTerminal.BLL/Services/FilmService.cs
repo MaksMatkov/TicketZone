@@ -45,7 +45,7 @@ namespace TiketsTerminal.BLL.Services
 
         public void Delete(FilmViewModel item)
         {
-            uow.FilmRepository.Save(mapper.Map<Film>(item));
+            uow.Delete(mapper.Map<Film>(item));
             uow.SaveChnages();
         }
 

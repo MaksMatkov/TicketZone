@@ -17,7 +17,9 @@ namespace TiketsTerminal.DAL.ModelsConfigurations
 
             builder.HasKey(p => p.ID);
 
-            builder.HasMany<FilmViewingTime>(el => el.FilmViewingTimes).WithOne(el => el.Film).HasForeignKey(el => el.FK_Film);
+            builder.HasMany<FilmViewingTime>(el => el.FilmViewingTimes)
+                .WithOne(el => el.Film)
+                .HasForeignKey(el => el.FK_Film);
 
             builder.Property(p => p.ID)
                .HasColumnName("PK_Film")

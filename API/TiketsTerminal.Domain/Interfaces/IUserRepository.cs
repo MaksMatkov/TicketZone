@@ -13,10 +13,6 @@ namespace TiketsTerminal.Domain.Interfaces
 
         public IEnumerable<User> GetAll();
 
-        public void Save(User item);
-    
-        public void Delete(User item);
-
         public User GetForAuthenticate(string email, string password);
     }
 }

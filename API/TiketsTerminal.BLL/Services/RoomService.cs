@@ -33,15 +33,13 @@ namespace TiketsTerminal.BLL.Services
 
         public void Save(RoomViewModel item)
         {
-
             uow.AddOrUpdate<Room>(new Room(item.ID, item.Number, item.SeatsCount));
-            // uow.RoomRepository.Save(new Room(item.ID, item.Number, item.SeatsCount));
             uow.SaveChnages();
         }
 
         public void Delete(RoomViewModel item)
         {
-            uow.RoomRepository.Save(mapper.Map<Room>(item));
+            uow.Delete(mapper.Map<Room>(item));
             uow.SaveChnages();
         }
     }

@@ -63,7 +63,7 @@ namespace TiketsTerminal.BLL.Services
 
         public void Delete(UserViewModel item)
         {
-            uow.UserRepository.Delete(mapper.Map<User>(item));
+            uow.Delete(mapper.Map<User>(item));
             uow.SaveChnages();
         }
 

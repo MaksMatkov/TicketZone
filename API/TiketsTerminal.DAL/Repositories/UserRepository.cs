@@ -10,50 +10,9 @@ using TiketsTerminal.Domain.Models;
 
 namespace TiketsTerminal.DAL.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        DBContext db;
-        public UserRepository(DBContext _db) { this.db = _db; }
-
-        public User Get(int id)
-        {
-            return db.User.FirstOrDefault(el => el.ID == id);
-        }
-
-        public IEnumerable<User> GetAll()
-        {
-            return db.User;
-        }
-
-        public void Save(User item)
-        {
-            try
-            {
-                if (item.ID > 0)
-                    db.Entry(item).State = EntityState.Modified;
-                else
-                    db.User.Add(item);
-            }
-            catch(Exception ex)
-            {
-
-            }
-        }
-
-        public void Delete(User item)
-        {
-            if (item.ID > 0)
-            {
-                try
-                {
-                    db.Entry(item).State = EntityState.Deleted;
-                }
-                catch (Exception ex)
-                {
-                   
-                }
-            }
-        }
+        public UserRepository(DBContext _db) : base(_db) { }
 
         public User GetForAuthenticate(string email, string password)
         {
