@@ -43,7 +43,8 @@ namespace TiketsTerminal.BLL.Services
                 new Role((int)user.FK_Role),
                 user.ID, user.Name);
             var User = new User(RegData);
-            uow.UserRepository.Save(User);
+            //uow.UserRepository.Save(User);
+            uow.AddOrUpdate<User>(User);
             uow.SaveChnages();
         }
 
@@ -55,7 +56,8 @@ namespace TiketsTerminal.BLL.Services
                 new Role((int)user.FK_Role),
                 user.ID, user.Name);
             var User = new User(RegData);
-            uow.UserRepository.Save(User);
+            // uow.UserRepository.Save(User);
+            uow.AddOrUpdate<User>(User);
             uow.SaveChnages();
         }
 

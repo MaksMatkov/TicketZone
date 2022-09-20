@@ -33,7 +33,9 @@ namespace TiketsTerminal.BLL.Services
 
         public void Save(RoomViewModel item)
         {
-            uow.RoomRepository.Save(new Room(item.ID, item.Number, item.SeatsCount));
+
+            uow.AddOrUpdate<Room>(new Room(item.ID, item.Number, item.SeatsCount));
+            // uow.RoomRepository.Save(new Room(item.ID, item.Number, item.SeatsCount));
             uow.SaveChnages();
         }
 

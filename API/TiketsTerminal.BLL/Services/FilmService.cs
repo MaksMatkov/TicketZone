@@ -39,7 +39,7 @@ namespace TiketsTerminal.BLL.Services
                 new StringValidator(item.TrailerUrl), 
                 new StringValidator(item.PosterUrl));
 
-            uow.FilmRepository.Save(film);
+            uow.AddOrUpdate<Film>(film);
             uow.SaveChnages();
         }
 
@@ -59,8 +59,8 @@ namespace TiketsTerminal.BLL.Services
                 throw new ArgumentException("Film is missing");
 
             var item = new FilmViewingTime(new DateValidator(ViewingTimeModel.Date), room, ViewingTimeModel.ID);
-            film.FilmViewingTimes.Add(item);
-
+           
+            uow.AddOrUpdate<FilmViewingTime>(item);
             uow.SaveChnages();
         }
 
@@ -84,7 +84,7 @@ namespace TiketsTerminal.BLL.Services
                 throw new ArgumentException("Room is missing");
 
 
-            var order = new TicketOrder(user, viewingTime, new DateValidator(TicketOrderViewModel.CreationDate));
+            var order = new TicketOrder(user, viewingTime, new DateValidator(TicketOrderViewModel.CreationDate), TicketOrderViewModel.ID);
             viewingTime.TicketOrders.Add(order);
 
             uow.SaveChnages();

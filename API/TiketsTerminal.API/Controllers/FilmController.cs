@@ -59,7 +59,7 @@ namespace TiketsTerminal.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         public ActionResult<FilmViewModel> Post(FilmViewModel item)
         {
             try
@@ -84,7 +84,7 @@ namespace TiketsTerminal.API.Controllers
             }
             catch
             {
-
+                //logger
             }
 
             return Ok();
@@ -92,7 +92,7 @@ namespace TiketsTerminal.API.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Client")]
-        [Route("SetViewingTime")]
+        [Route("SetTicketOrder")]
         public ActionResult SetTicketOrder(TicketOrderViewModel model)
         {
             var userID = 0;

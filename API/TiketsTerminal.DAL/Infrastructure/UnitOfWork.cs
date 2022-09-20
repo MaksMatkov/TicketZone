@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,14 @@ namespace TiketsTerminal.DAL.Infrastructure
 
         public void SaveChnages() => db.SaveChanges();
 
-        
+        public void AddOrUpdate<T>(T item) where T : class
+        {
+            db.Update<T>(item);
+        }
+
+        public void Delete<T>(T item) where T : class
+        {
+            db.Entry(item).State = EntityState.Deleted;
+        }
     }
 }
