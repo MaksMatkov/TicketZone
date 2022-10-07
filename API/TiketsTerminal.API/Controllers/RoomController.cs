@@ -58,6 +58,7 @@ namespace TiketsTerminal.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public ActionResult<RoomViewModel> Post(RoomViewModel item)
         {
             try

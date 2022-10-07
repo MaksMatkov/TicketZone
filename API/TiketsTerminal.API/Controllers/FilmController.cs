@@ -59,7 +59,7 @@ namespace TiketsTerminal.API.Controllers
         }
 
         [HttpPost]
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult<FilmViewModel> Post(FilmViewModel item)
         {
             try
