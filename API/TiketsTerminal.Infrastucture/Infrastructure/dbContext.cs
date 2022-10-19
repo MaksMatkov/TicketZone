@@ -4,15 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TiketsTerminal.DAL.ModelsConfigurations;
 using TiketsTerminal.Domain.Models;
-using TiketsTerminal.Domain.Models.ValueModels;
+using TiketsTerminal.Infrastucture.ModelsConfigurations;
 
-namespace TiketsTerminal.DAL.Infrastructure
+namespace TiketsTerminal.Infrastucture.Infrastructure
 {
-    public class DBContext : DbContext
+    public class dbContext : DbContext
     {
-        public DBContext(ConnectionStringsConfiguration ConnectionStringsConfiguration) : base()
+        public dbContext(ConnectionStringsConfiguration ConnectionStringsConfiguration) : base()
         {
             this.connectionString = ConnectionStringsConfiguration.Main;
         }

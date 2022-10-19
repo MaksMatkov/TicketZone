@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -18,10 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TiketsTerminal.APP\TiketsTerminal.APP.csproj" />
-    <ProjectReference Include="..\TiketsTerminal.BLL\TiketsTerminal.BLL.csproj" />
-    <ProjectReference Include="..\TiketsTerminal.DAL\TiketsTerminal.DAL.csproj" />
+    <ProjectReference Include="..\TiketsTerminal.BusinessLogic\TiketsTerminal.BusinessLogic.csproj" />
     <ProjectReference Include="..\TiketsTerminal.Domain\TiketsTerminal.Domain.csproj" />
+    <ProjectReference Include="..\TiketsTerminal.Infrastucture\TiketsTerminal.Infrastucture.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,20 +9,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using ProjectBerloga.APP.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TiketsTerminal.API.Infrastructure;
-using TiketsTerminal.APP;
-using TiketsTerminal.APP.Interfaces;
-using TiketsTerminal.Bll.Interfaces;
-using TiketsTerminal.BLL.Interfaces;
-using TiketsTerminal.BLL.Services;
-using TiketsTerminal.DAL.Infrastructure;
-using TiketsTerminal.DAL.Repositories;
-using TiketsTerminal.Domain.Interfaces;
+using TiketsTerminal.BusinessLogic;
+using TiketsTerminal.BusinessLogic.Abstraction;
+using TiketsTerminal.BusinessLogic.Interfaces;
+using TiketsTerminal.BusinessLogic.Services;
+using TiketsTerminal.Infrastucture.Infrastructure;
 
 namespace TiketsTerminal.API
 {
@@ -102,7 +98,7 @@ namespace TiketsTerminal.API
         {
             var connectionStrings = Configuration.GetSection("ConnectionStrings").Get<ConnectionStringsConfiguration>();
 
-            services.AddDbContext<DBContext>(o =>
+            services.AddDbContext<dbContext>(o =>
             {
             });
 
@@ -115,20 +111,11 @@ namespace TiketsTerminal.API
             services.AddSingleton(mapper);
 
             //add di
-            services.AddSingleton<DBContext>();
             services.AddSingleton(connectionStrings);
-            services.AddScoped<UnitOfWork>();
-
-            //repo
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IRoomRepository, RoomRepository>();
-            services.AddScoped<IFilmRepository, FilmRepository>();
 
             //serv
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
-            services.AddScoped<IRoomService, RoomService>();
-            services.AddScoped<IFilmService, FilmService>();
 
         }
 

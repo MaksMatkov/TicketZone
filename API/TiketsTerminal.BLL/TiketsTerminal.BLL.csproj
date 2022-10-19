@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TiketsTerminal.DAL\TiketsTerminal.DAL.csproj" />
     <ProjectReference Include="..\TiketsTerminal.Domain\TiketsTerminal.Domain.csproj" />
   </ItemGroup>
 

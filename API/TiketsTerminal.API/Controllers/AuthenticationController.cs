@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TiketsTerminal.APP;
-using TiketsTerminal.APP.Interfaces;
+using TiketsTerminal.BusinessLogic;
+using TiketsTerminal.BusinessLogic.Interfaces;
 
 namespace TiketsTerminal.API.Controllers
 {
@@ -24,9 +24,9 @@ namespace TiketsTerminal.API.Controllers
 
         [Route("login")]
         [HttpGet]
-        public IActionResult Login(string email, string password)
+        public async Task<IActionResult> Login(string email, string password)
         {
-            var User = AuthenticationService.AuthenticateUser(email, password);
+            var User = await AuthenticationService.AuthenticateUser(email, password);
 
             if (User != null)
             {
