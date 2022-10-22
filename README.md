@@ -6,6 +6,5 @@ This .net core 5 API that include all of my main knowledge!
 - Connect to SQLite
 - Dependency injection
 - JWT Authentication
-- Unit Of Work
 - Migrations
 - Models Configurations
