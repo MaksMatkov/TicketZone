@@ -9,12 +9,12 @@ namespace TiketsTerminal.Domain.Models
 {
     public class TicketOrder
     {
-        public int ID { get; private set; }
-        public int FK_User { get; private set; }
-        public int FK_Film_Viewing_Time { get; private set; }
-        public DateTime CreationDate { get; private set; }
+        public int ID { get; set; }
+        public int FK_User { get; set; }
+        public int FK_Film_Viewing_Time { get; set; }
+        public DateTime CreationDate { get; set; }
+        public Status Status { get; set; } = Status.NeedApprove;
 
-        public Status Status { get; private set; }
         public User User { get; set; } 
         public FilmViewingTime FilmViewingTime { get; set; }
     }

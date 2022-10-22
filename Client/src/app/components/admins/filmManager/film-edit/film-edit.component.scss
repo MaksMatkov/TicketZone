@@ -1,0 +1,43 @@
+.edit-body{
+    display: flex;
+    justify-content: center;
+    padding-top: 37px;
+    padding-bottom: 43px;
+
+    .card{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 70%;
+
+        >div{
+            display: flex;
+            justify-content: space-around;
+
+            >div{
+                width: 50%;
+                margin: 25px;
+            }
+        }
+
+        .text-value{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .media-data{
+            width: 100%;
+
+            mat-form-field{
+                width: 100%;
+            }
+
+            >div{
+                justify-content: center;
+                display: flex;
+                margin: 17px;
+            }
+          
+        }
+    }
+}

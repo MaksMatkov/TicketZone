@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TiketsTerminal.API.Infrastructure;
+using TiketsTerminal.API.Middleware;
 using TiketsTerminal.BusinessLogic;
 using TiketsTerminal.BusinessLogic.Abstraction;
 using TiketsTerminal.BusinessLogic.Interfaces;
@@ -115,6 +116,10 @@ namespace TiketsTerminal.API
 
             //serv
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IFilmService, FilmService>();
+            services.AddScoped<IRoomService, RoomService>();
+            services.AddScoped<IFilmViewingTimeService, FilmViewingTimeService>();
+            services.AddScoped<ITicketOrderService, TicketOrderService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
 
         }
@@ -130,11 +135,18 @@ namespace TiketsTerminal.API
             }
 
             app.UseHttpsRedirection();
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors(builder => builder
+              .AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader());
+           
 
             app.UseEndpoints(endpoints =>
             {

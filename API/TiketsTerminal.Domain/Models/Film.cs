@@ -13,7 +13,6 @@ namespace TiketsTerminal.Domain.Models
         public string Description { get; set; }
         public string TrailerUrl { get; set; }
         public string PosterUrl { get; set; }
-
-        public IEnumerable<FilmViewingTime> FilmViewingTimes { get; set; } 
+        public IEnumerable<FilmViewingTime> FilmViewingTimes { get; set; } = new List<FilmViewingTime>();
     }
 }

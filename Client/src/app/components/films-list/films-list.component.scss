@@ -1,0 +1,52 @@
+.search-field {
+    width: 60%;
+}
+
+.search-bar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.films-grid{
+    background-color: white;
+}
+
+.film-cart{
+    margin: 20px;
+    overflow: hidden;
+    background-color: var(--mist);
+    border-radius: 20px;
+    height: 80%;
+    width: 100%;
+    display: flex;
+    transition: transform 0.5s ease;
+    transition-property: box-shadow, transform;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+    }
+
+    .film-poster{
+        width: 100%;
+    }
+
+    .film-name{
+        position: relative;
+        bottom: 13%;
+        padding: 8px;
+        margin-bottom: 12px;
+        /* height: 100px; */
+        text-align: center;
+        background-color: black;
+        color: white;
+        display: block;
+        width: 100%;
+    }
+}
+

@@ -26,6 +26,16 @@ namespace TiketsTerminal.BusinessLogic.Services
             _db.SaveChanges();
         }
 
+        public async Task<bool> Delete(int id)
+        {
+            var item = await GetByKeysAsync(id);
+            if (item == null)
+                throw new Exception($"{typeof(T).Name} not found.");
+            Delete(item);
+
+            return true;
+        }
+
         public async Task<IEnumerable<T>> GetAsync()
         {
             return await _db.Set<T>().ToListAsync();
@@ -36,11 +46,13 @@ namespace TiketsTerminal.BusinessLogic.Services
             return await _db.Set<T>().FindAsync(keyValues);
         }
 
-        public async Task<T> SaveAsync(T item)
+        public virtual async Task<T> SaveAsync(T item)
         {
             if (item == null)
                 throw new ArgumentNullException();
 
+            //added to detach from old entities
+            _db.ChangeTracker.Clear();
             _db.Update<T>(item);
             await _db.SaveChangesAsync();
             return item;

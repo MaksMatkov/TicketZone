@@ -9,14 +9,17 @@ namespace TiketsTerminal.Domain.Enums
     public enum Role
     {
         None = 0,
-        Client = 1,
+        User = 1,
         Admin = 2,   
     }
 
     public enum Status
     {
         Complete = 0,
-        NeedReject = 1,
-        Rejected = 3
+        Approved = 1,
+        NeedApprove = 2, 
+        NeedReject = 3,
+        Rejected = 4,
+        RejectedDeclined = 5
     }
 }

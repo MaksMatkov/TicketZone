@@ -11,6 +11,7 @@ namespace TiketsTerminal.BusinessLogic.Abstraction
         public Task<IEnumerable<T>> GetAsync();
         public Task<T> GetByKeysAsync(params object[] keyValues);
         public void Delete(T item);
+        public Task<bool> Delete(int id);
         public Task<T> SaveAsync(T item);
     }
 }

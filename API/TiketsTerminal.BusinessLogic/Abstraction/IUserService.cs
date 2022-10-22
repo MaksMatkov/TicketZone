@@ -9,6 +9,7 @@ namespace TiketsTerminal.BusinessLogic.Abstraction
 {
     public interface IUserService : IBaseServise<User>
     {
-        public Task<User> GetForAuthenticate(string email, string password);
+        public Task<User> GetForAuthenticateAsync(string email, string password);
+        public Task<User> ApproveUserAsync(int id);
     }
 }

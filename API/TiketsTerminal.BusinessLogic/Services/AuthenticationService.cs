@@ -23,7 +23,7 @@ namespace TiketsTerminal.BusinessLogic
 
         public async Task<User> AuthenticateUser(string email, string password)
         {
-            return await _us.GetForAuthenticate(email, password);
+            return await _us.GetForAuthenticateAsync(email, password);
         }
 
         public string GetJWT(User user, IOptions<AuthenticationConfiguration> options)
@@ -37,7 +37,7 @@ namespace TiketsTerminal.BusinessLogic
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Sub, user.ID.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()),
                 new Claim(ClaimTypes.Role, UserRole.ToString())
             };
 

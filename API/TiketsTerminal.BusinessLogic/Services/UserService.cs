@@ -14,9 +14,21 @@ namespace TiketsTerminal.BusinessLogic.Services
     {
         public UserService(dbContext db): base(db) { }
 
-        public async Task<User> GetForAuthenticate(string email, string password)
+        public async Task<User> ApproveUserAsync(int id)
         {
-            return await _db.User.FirstOrDefaultAsync(el => el.Email == email && el.Password == password);
+            var user = await GetByKeysAsync(id);
+            if (user == null)
+                throw new Exception("User not found!");
+            user.IsApproved = true;
+
+            await _db.SaveChangesAsync();
+
+            return user;
+        }
+
+        public async Task<User> GetForAuthenticateAsync(string email, string password)
+        {
+            return await _db.User.FirstOrDefaultAsync(el => el.Email == email && el.Password == password && el.IsApproved);
         }
     }
 }

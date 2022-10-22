@@ -1,0 +1,17 @@
+<div class="login-form">
+   
+        <form class="card" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <mat-form-field appearance="fill">
+                <mat-label>Enter your email</mat-label>
+                <input matInput placeholder="pat@example.com" [formControl]="emailForm"  required>
+                <mat-error *ngIf="emailForm.invalid">{{getErrorMessage("password")}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput [formControl]="passwordForm" required>
+                <mat-error *ngIf="passwordForm.invalid">{{getErrorMessage("password")}}</mat-error>
+            </mat-form-field>
+
+            <button mat-stroked-button type="submit">Submit</button>
+        </form>
+</div>

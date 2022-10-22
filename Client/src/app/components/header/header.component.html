@@ -1,0 +1,11 @@
+<header>
+    <div class="controls">
+        <button mat-raised-button color="warn" (click)="clickLogOut()" *ngIf="_as.currentUserValue">Log Out</button>
+        <button mat-raised-button (click)="clickLogIn()" color="primary" *ngIf="!_as.currentUserValue">Log In</button>
+        <button mat-fab (click)="clickHome()" color="primary" >
+            <mat-icon>home</mat-icon>
+        </button>
+
+    </div>
+</header>
+
