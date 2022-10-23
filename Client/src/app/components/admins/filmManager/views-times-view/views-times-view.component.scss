@@ -1,0 +1,29 @@
+.v-t-body{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+}
+
+.v-t-list{
+    width: 100%;
+}
+
+.v-t-edit{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: 150%;
+}
+
+
+.f-body{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+
+.f-body-r{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin: 15px;
+}

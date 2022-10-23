@@ -92,6 +92,16 @@ namespace TiketsTerminal.API
                     };
                 });
 
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:4200/").AllowAnyHeader()
+                 .AllowAnyMethod();
+                    });
+            });
+
             SetupDependencyInjection(services);
         }
 

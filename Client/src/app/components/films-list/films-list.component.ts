@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FilmLite } from 'src/app/common/models/film/FilmLite';
 import { FilmService } from 'src/app/common/services/filmService/film.service';
@@ -15,7 +16,7 @@ export class FilmsListComponent implements OnInit {
 
   filmList!: Observable<FilmLite[]>;
 
-  constructor(public _fs : FilmService) { }
+  constructor(public _fs : FilmService, private router: Router) { }
 
   ngOnInit(): void {
     this.setColsCount(window.innerWidth)
@@ -25,6 +26,10 @@ export class FilmsListComponent implements OnInit {
 
   reload() : void {
     this.filmList = this._fs.GetAll();
+  }
+
+  view(id : number){
+    this.router.navigate(["/film", id])
   }
 
   @HostListener('window:resize', ['$event'])

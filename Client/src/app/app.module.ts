@@ -20,7 +20,7 @@ import { environment } from 'src/environments/environment';
 import {MatListModule} from '@angular/material/list';
 
 import {MatTabsModule} from '@angular/material/tabs';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminMenuComponent } from './components/admins/admin-menu/admin-menu.component';
 import { LoginComponent } from './components/login-components/login/login.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -29,6 +29,18 @@ import { FilmViewComponent } from './components/admins/filmManager/film-view/fil
 import { OrdersViewComponent } from './components/admins/filmManager/orders-view/orders-view.component';
 import { ViewsTimesViewComponent } from './components/admins/filmManager/views-times-view/views-times-view.component';
 import { FilmEditComponent } from './components/admins/filmManager/film-edit/film-edit.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { UsersListComponent } from './components/admins/userManager/users-view/users-list/users-list.component';
+import { ViewFilmComponent } from './components/view-film/view-film.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { LoadingInterceptor } from './common/interceptors/loading';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { RoomListComponent } from './components/admins/roomManager/room-list/room-list.component';
+import {MatSelectModule} from '@angular/material/select';
+import { OrdersComponent } from './components/orders/orders.component';
+
 
 export function tokenGetter() {
   let key = 'jwt';
@@ -62,7 +74,11 @@ export function tokenGetter() {
     FilmViewComponent,
     OrdersViewComponent,
     ViewsTimesViewComponent,
-    FilmEditComponent
+    FilmEditComponent,
+    UsersListComponent,
+    ViewFilmComponent,
+    RoomListComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +90,12 @@ export function tokenGetter() {
     MatFormFieldModule,
     MatButtonModule,
     MatListModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
 
     MatTabsModule,
     MatInputModule,
@@ -87,7 +109,11 @@ export function tokenGetter() {
       }
     }),
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoadingInterceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

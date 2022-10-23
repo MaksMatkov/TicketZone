@@ -1,21 +1,33 @@
+mat-progress-bar{
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+
 header{
     background-color: var(--sky);
-    display: flex;
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: -23px;
     width: 100%;
     z-index: 999;
-    justify-content: flex-end;
+    // justify-content: flex-end;
     flex-direction: row;
     flex-wrap: nowrap;
 
+    .header-text{
+        color: white;
+    }
+
+    mat-toolbar{
+        background-color: var(--sky);
+    }
     .controls{
         display: flex;
-        width: 25%;
-        margin-right: 15px;
-        justify-content: flex-end;
-        align-items: center;
+    width: 100%;
+    margin-right: 15px;
+    justify-content: flex-end;
+    align-items: center;
 
        button{
         margin-left: 8px;

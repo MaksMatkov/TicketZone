@@ -77,8 +77,10 @@ namespace TiketsTerminal.API.Infrastructure
                 .ForMember("ID", el => el.MapFrom(v => v.ID))
                 .ForMember("Date", el => el.MapFrom(v => v.Date))
                 .ForMember("RoomNumber", el => el.MapFrom(v => (v.Room != null) ? v.Room.Number : 0))
+                .ForMember("RoomId", el => el.MapFrom(v => (v.Room != null) ? v.Room.ID : 0))
                 .ForMember("OrdersCount", el => el.MapFrom(v => (v.TicketOrders != null) ? v.TicketOrders.Count() : 0))
                 .ForMember("SeatsCount", el => el.MapFrom(v => (v.Room != null) ? v.Room.SeatsCount : 0))
+                .ForMember("FilmId", el => el.MapFrom(v => v.FK_Film))
                 .ReverseMap();
 
             //Room
@@ -100,11 +102,19 @@ namespace TiketsTerminal.API.Infrastructure
 
             //ticket order
             CreateMap<AddTicketOrderRequest, TicketOrder>()
-                .ForMember("FK_Film_Viewing_Time", el => el.MapFrom(v => v.FK_Film_Viewing_Time))
+                .ForMember("FK_Film_Viewing_Time", el => el.MapFrom(v => v.FilmViewingTimeId))
                 .ReverseMap();
 
             CreateMap<TicketOrder, AddTicketOrderResponse>()
                 .ForMember("ID", el => el.MapFrom(v => v.ID))
+                .ReverseMap();
+
+            CreateMap<TicketOrder, GetTicketOrderResponse>()
+                .ForMember("id", el => el.MapFrom(v => v.ID))
+                .ForMember("UserId", el => el.MapFrom(v => v.FK_User))
+                .ForMember("FilmViewingTimeId", el => el.MapFrom(v => v.FK_Film_Viewing_Time))
+                .ForMember("CreationDate", el => el.MapFrom(v => v.CreationDate))
+                .ForMember("Status", el => el.MapFrom(v => v.Status))
                 .ReverseMap();
 
         }

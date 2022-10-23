@@ -1,0 +1,14 @@
+<div>
+    <mat-selection-list #roomsGrid [multiple]="false">
+        <mat-list-option class="row" *ngFor="let room of roomList | async" [value]="room.id">
+            <div class="row">
+                <div> Number: {{room.number}};  Seats Count: {{room.seatsCount}}</div>
+                <div>
+                    <button mat-icon-button color="primary" (click)="edit(room)">Edit</button>
+                    <button mat-icon-button color="warn" (click)="onDeleteClick(room.id)">Delete</button>
+                </div>
+            </div>
+        </mat-list-option>
+        <mat-list-option (click)="addNew();" ><span class="add-film"><mat-icon>add</mat-icon> Add new room</span></mat-list-option>
+    </mat-selection-list>
+</div>

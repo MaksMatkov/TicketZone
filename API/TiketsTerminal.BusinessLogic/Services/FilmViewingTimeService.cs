@@ -14,6 +14,11 @@ namespace TiketsTerminal.BusinessLogic.Services
     {
         public FilmViewingTimeService(dbContext db) : base(db) { }
 
+        public async Task<List<FilmViewingTime>> GetByFilmAsync(int FilmId)
+        {
+            return await _db.FilmViewingTime.Where(el => el.FK_Film == FilmId).ToListAsync();
+        }
+
         public async Task<FilmViewingTime> GetDeepDataAsync(int FilmViewingTimeId)
         {
             var FilmViewingTime = await _db.FilmViewingTime

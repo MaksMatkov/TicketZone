@@ -15,12 +15,14 @@ namespace TiketsTerminal.API.Controllers
     public class FilmsController : ControllerBase
     {
         private readonly IFilmService _filmService;
+        private readonly IFilmViewingTimeService _filmViewingTimeService;
         private readonly AutoMapper.IMapper _mapper;
 
-        public FilmsController(IFilmService filmService, AutoMapper.IMapper mapper)
+        public FilmsController(IFilmService filmService, IFilmViewingTimeService filmViewingTimeService, AutoMapper.IMapper mapper)
         {
             _mapper = mapper;
             _filmService = filmService;
+            _filmViewingTimeService = filmViewingTimeService;
         }
 
         [HttpGet("{id}")]
@@ -30,6 +32,8 @@ namespace TiketsTerminal.API.Controllers
             var result = new GetFilmResponse();
 
             film = await _filmService.GetDeepByKeysAsync(id);
+            if (film == null)
+                throw new Exception("Film not found!");
             result = _mapper.Map<Film, GetFilmResponse>(film);
 
             result.ViewingTimes = _mapper.Map<List<FilmViewingTime>, List<GetFilmViewingTimeLiteResponse>>(film.FilmViewingTimes.ToList());
@@ -43,6 +47,14 @@ namespace TiketsTerminal.API.Controllers
             var films = await _filmService.GetAsync();
 
             return _mapper.Map<List<Film>, List<GetFilmLiteResponse>>(films.ToList());
+        }
+
+        [HttpGet("{id}/viewingTimes")]
+        public async Task<List<GetFilmViewingTimeLiteResponse>> GetViewingTimes(int id)
+        {
+            var list = await _filmViewingTimeService.GetByFilmAsync(id);
+
+            return _mapper.Map<List<FilmViewingTime>, List<GetFilmViewingTimeLiteResponse>>(list.ToList());
         }
 
         [HttpPost]

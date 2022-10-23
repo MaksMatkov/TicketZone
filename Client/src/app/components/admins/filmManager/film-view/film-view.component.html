@@ -3,11 +3,17 @@
         <mat-list-option class="row" *ngFor="let film of filmList | async" [value]="film.id">
             <div class="row">
                 <div> {{film.name}}</div>
-                <div>
-                    <button mat-flat-button color="warn">Delete</button>
-                    <button mat-flat-button color="primary" [routerLink]="['/film-edit', film.id]">Edit</button>
+                <div class="row-controls">
+                    <button mat-icon-button color="primary" [routerLink]="['/film-edit', film.id]">Edit</button>
+                    <button mat-icon-button color="warn" (click)="onDeleteClick(film.id)">Delete</button>
+                    <button style="margin-left:15px;" mat-raised-button color="primary" (click)="switchVTInfo(film.id)">{{ showViewingTime && filmIdViewingTime == film.id ? "Hide View Time Info" : "Show View Time Info" }}</button>
                 </div>
             </div>
         </mat-list-option>
+        <mat-list-option class="add-new-b" [routerLink]="['/film-edit']"><span class="add-row"><mat-icon>add</mat-icon> Add new film</span></mat-list-option>
     </mat-selection-list>
+
+    <div *ngIf="showViewingTime">
+        <app-views-times-view [filmId]="filmIdViewingTime"></app-views-times-view>
+    </div>
 </div>

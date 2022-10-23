@@ -41,15 +41,17 @@ export class FilmEditComponent implements OnInit {
   }
 
 
-  constructor(public route: ActivatedRoute, public _fs :FilmService) { }
+  constructor(public route: ActivatedRoute, public _fs :FilmService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.filmId = params['id'];
-      this._fs.GetById(this.filmId).subscribe(data => {
-        this.film = data;
-        this.initData();
-      })
+      if(this.filmId){
+        this._fs.GetById(this.filmId).subscribe(data => {
+          this.film = data;
+          this.initData();
+        })
+      }
     });
   }
 
@@ -62,20 +64,23 @@ export class FilmEditComponent implements OnInit {
   }
 
   submit(){
+    console.log("here")
     let inputModel = new AddFilm();
+    inputModel.name = this.nameForm.value;
+    inputModel.description = this.descriptionForm.value;
+    inputModel.posterUrl = this.posterForm.value;
+    inputModel.trailerUrl = this.trailerForm.value;
+
     if(this.film && this.film.id > 0){
-      inputModel.name = this.film.name;
-      inputModel.description = this.film.description;
-      inputModel.posterUrl = this.film.posterUrl;
-      inputModel.trailerUrl = this.film.trailerUrl;
-      this._fs.Put(inputModel, this.film.id)
+      this._fs.Put(inputModel, this.film.id).subscribe(data => {
+        this.router.navigate(['/admin']);
+      }, err => alert("Something went wrong!"))
     }
     else {
-      inputModel.name = this.nameForm.value;
-      inputModel.description = this.descriptionForm.value;
-      inputModel.posterUrl = this.posterForm.value;
-      inputModel.trailerUrl = this.trailerForm.value;
+      console.log("start saving")
       this._fs.Save(inputModel)
+      .subscribe(data => this.router.navigate(['/admin']), 
+      err => {alert("Something went wrong!"); console.log(err)});
     }
   }
 }

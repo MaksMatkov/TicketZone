@@ -1,1 +1,49 @@
-<p>views-times-view works!</p>
+<div class="v-t-body">
+    <div class="v-t-list">
+        <mat-selection-list #vtGrid [multiple]="false">
+            <mat-list-option (click)="initData(vt.id)" class="row" *ngFor="let vt of vTimes | async" [value]="vt.id">
+                <div class="row">
+                    <div> {{vt.date | date}}</div>
+                    <div class="row-controls">
+                        <button mat-icon-button color="warn" (click)="onDeleteClick(vt.id)">Delete</button>
+                    </div>
+                </div>
+            </mat-list-option>
+            <mat-list-option class="add-new-b" (click)="initData(0)"><span class="add-row"><mat-icon>add</mat-icon> Add new Viewing Time</span></mat-list-option>
+        </mat-selection-list>
+    </div>
+    <div class="v-t-edit" *ngIf="isOpenEditBlock">
+        <form [formGroup]="vtForm" (ngSubmit)="submit()">
+            <div class="f-body">
+                <div class="f-body-r">
+                    <div>
+                        <mat-form-field color="accent" appearance="fill">
+                            <mat-label>Date</mat-label>
+                            <input matInput [min]="minDate" [matDatepicker]="picker2" [formControl]="dateControl" required>
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="fill" >
+                            <mat-label>Room</mat-label>
+                            <mat-select [formControl]="roomControl"  required="trued">
+                              <mat-option [value]="room.id"  *ngFor="let room of Rooms | async">{{room.number}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="f-body-r">
+                    <div>
+                        <span class=""></span>
+                    </div>
+                </div>
+                <div class="f-body-r">
+                    <button mat-stroked-button (click)="isOpenEditBlock = false" type="button" >cancel</button>
+                    <button mat-stroked-button type="submit" >save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

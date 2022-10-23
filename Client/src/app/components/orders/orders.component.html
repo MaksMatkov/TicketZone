@@ -1,0 +1,16 @@
+<div class="my-orders-b">
+    <mat-selection-list #filmsGrid [multiple]="false">
+        <mat-list-option class="row" *ngFor="let order of orderList | async" [value]="order.id">
+            <div class="row">
+                <div> {{order.creationDate | date}}</div>
+                <div class="order-row-controls">
+                    <div *ngIf="order.status == status.NeedApprove">In Approve Proc... </div>
+                    <div *ngIf="order.status == status.Approved">Approved </div>
+                    <button mat-raised-button (click)="reject(order.id)" *ngIf="order.status != status.Rejected && order.status != status.NeedReject" color="warn">Reject</button>
+                    <div *ngIf="order.status == status.Rejected">Rejected</div>
+                    <div *ngIf="order.status == status.NeedReject">In Reject Proc...</div>
+                </div>
+            </div>
+        </mat-list-option>
+    </mat-selection-list>
+</div>

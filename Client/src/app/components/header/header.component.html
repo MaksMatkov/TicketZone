@@ -1,11 +1,21 @@
+<mat-progress-bar *ngIf="_loadS.State.Show" mode="indeterminate"></mat-progress-bar>
 <header>
-    <div class="controls">
-        <button mat-raised-button color="warn" (click)="clickLogOut()" *ngIf="_as.currentUserValue">Log Out</button>
-        <button mat-raised-button (click)="clickLogIn()" color="primary" *ngIf="!_as.currentUserValue">Log In</button>
-        <button mat-fab (click)="clickHome()" color="primary" >
-            <mat-icon>home</mat-icon>
-        </button>
+    <mat-toolbar>
+        
+        <span class="header-text"><mat-icon>important_devices</mat-icon> Cinema Tickets</span>
+        <div class="controls">
+            <button mat-raised-button color="warn" (click)="clickLogOut()" *ngIf="_as.currentUserValue">Log Out</button>
+            <button mat-raised-button (click)="clickLogIn()" color="primary" *ngIf="!_as.currentUserValue">Log
+                In</button>
+            
+            <button mat-raised-button (click)="clickMyOrders()" color="primary" *ngIf="_as.currentUserValue && _as.currentUserValue.role == role.User">My Orders</button>
 
-    </div>
+            <button mat-mini-fab (click)="clickSettings()" *ngIf="_as.currentUserValue && _as.currentUserValue.role == role.Admin"  color="primary">
+                <mat-icon>settings</mat-icon>
+            </button>
+            <button mat-fab (click)="clickHome()" color="primary">
+                <mat-icon>home</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
 </header>
-

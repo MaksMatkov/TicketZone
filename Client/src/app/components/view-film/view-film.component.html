@@ -1,0 +1,39 @@
+<div class="film-view-body">
+    <div class="film-data">
+        <div class="poster">
+            <img [src]="film && film.posterUrl">
+        </div>
+        <div class="text-info">
+            <div class="film-name"> {{film && film.name}}</div>
+            <div class="film-description"> {{film && film.description}}</div>
+        </div>
+    </div>
+    <div class="viewing-times">
+        <div *ngIf="!showMoreInfo">
+            <mat-selection-list *ngIf="film && film.viewingTimes && film.viewingTimes.length > 0" #timesGrid
+                [multiple]="false">
+                <mat-list-option class="row" (click)="selectView(vt.id)" *ngFor="let vt of film.viewingTimes"
+                    [value]="vt.id">
+                    <div class="row">
+                        {{vt.date | date}}
+                    </div>
+                </mat-list-option>
+            </mat-selection-list>
+
+            <div *ngIf="isNotHaveAnyShow">
+                <h1>Not Have Any Sessions</h1>
+            </div>
+        </div>
+        <div *ngIf="showMoreInfo">
+            <div>Time: {{selectedView.date | date}}</div>
+            <div>Room: {{ selectedView.roomNumber }}</div>
+            <div>Free Seats Count: {{ selectedView.seatsCount - selectedView.ordersCount }}</div>
+            <div>
+                <button mat-raised-button (click)="backClick()">Back</button>
+                <button mat-raised-button (click)="madeOrder()" color="accent">Order ticket</button>
+            </div>
+
+        </div>
+    </div>
+
+</div>

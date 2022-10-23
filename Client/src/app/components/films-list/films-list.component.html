@@ -11,10 +11,15 @@
     <div class="films-grid">
         <mat-grid-list [cols]="cols" rowHeight="1:1.4">
             <mat-grid-tile *ngFor="let film of filmList | async">
-                <div class="film-cart">
-                    <img class="film-poster" [src]="film.posterUrl">
-                    <h2 class="film-name">{{film.name}}</h2>
-                </div>
+                <mat-card  class="film-cart" (click)="view(film.id)"  >
+                    <img mat-card-image [src]="film.posterUrl" alt="">
+                    
+
+                    <mat-card-header class="cart-header">
+                        <mat-card-title class="film-name">{{film.name}}</mat-card-title>
+                        
+                    </mat-card-header>
+                </mat-card>
             </mat-grid-tile>
         </mat-grid-list>
     </div>

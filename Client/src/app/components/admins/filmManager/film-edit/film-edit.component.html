@@ -2,20 +2,6 @@
     <form class="card" [formGroup]="filmForm" (ngSubmit)="submit()">
 
         <div>
-            <div class="text-value">
-                <mat-form-field appearance="fill">
-                    <mat-label>Name</mat-label>
-                    <input matInput placeholder="pat@example.com" [formControl]="nameForm"  required>
-                    <mat-error *ngIf="nameForm.invalid">Invalid value</mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Description</mat-label>
-                    <textarea rows="10" matInput [formControl]="descriptionForm" required></textarea>
-                    <mat-error *ngIf="descriptionForm.invalid">Invalid value</mat-error>
-                </mat-form-field>
-    
-            </div>
-    
             <div class="media-data">
                 <div>
                     <img style="width: 70%;" src="{{posterForm.value}}">
@@ -26,22 +12,32 @@
                     <input matInput [formControl]="posterForm" required>
                     <mat-error *ngIf="posterForm.invalid">Invalid value</mat-error>
                 </mat-form-field>    
-            </div>
 
-            <div class="media-data">
-                <div>
-                    
-
-                    <iframe width="140" height="90" src="{{trailerForm.value}}">
-                    </iframe>
-                </div>
-    
                 <mat-form-field appearance="fill">
                     <mat-label>Trailer</mat-label>
                     <input matInput [formControl]="trailerForm" required>
                     <mat-error *ngIf="trailerForm.invalid">Invalid value</mat-error>
                 </mat-form-field>    
             </div>
+
+
+
+            <div class="text-value">
+                <mat-form-field appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="pat@example.com" [formControl]="nameForm"  required>
+                    <mat-error *ngIf="nameForm.invalid">Invalid value</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Description</mat-label>
+                    <textarea rows="30" matInput [formControl]="descriptionForm" required></textarea>
+                    <mat-error *ngIf="descriptionForm.invalid">Invalid value</mat-error>
+                </mat-form-field>
+    
+            </div>
+    
+            
+            
         </div>
         
 

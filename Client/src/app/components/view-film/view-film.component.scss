@@ -1,0 +1,46 @@
+.film-view-body {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* padding: 15px; */
+    
+
+    .film-data {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        .poster {
+            max-width: 300px;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .text-info {
+            padding: 10px;
+            max-width: 90%;
+
+            .film-name {
+                font-size: xx-large;
+                font-weight: 500;
+                margin-bottom: 45px;
+            }
+        }
+    }
+
+    .viewing-times{
+        width: 60%;
+        .calendar-card{
+            width: 100%;
+        }
+    }
+
+    .have-film{
+
+    }
+
+    .not-have-film{
+
+    }
+}

@@ -67,6 +67,7 @@ namespace TiketsTerminal.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<bool> Delete(int id)
         {
+
             await _roomService.Delete(id);
             return true;
         }

@@ -1,12 +1,21 @@
-.login-form{
+.login-form {
     width: 100%;
     display: flex;
     justify-content: center;
 
-    .card{
+    .card {
         display: flex;
         margin: 60px;
         width: 33%;
         flex-direction: column;
+    }
+
+    .log-btns {
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+            margin-left: 10px;
+        }
     }
 }

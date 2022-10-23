@@ -81,6 +81,19 @@ namespace TiketsTerminal.API.Controllers
             return true;
         }
 
+        [HttpPost("addadmin")]
+        [Authorize(Roles = "Admin")]
+        public async Task<AddUserResponse> AddAdmin(AddUserRequest user)
+        {
+            var _user = _mapper.Map<AddUserRequest, User>(user);
+            _user.FK_Role = Domain.Enums.Role.Admin;
+            _user.IsApproved = true;
+
+            await _userService.SaveAsync(_user);
+
+            return _mapper.Map<User, AddUserResponse>(_user);
+        }
+
 
 
     }

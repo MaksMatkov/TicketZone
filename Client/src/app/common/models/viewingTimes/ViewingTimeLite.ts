@@ -1,4 +1,7 @@
 export class ViewingTimeLite {
-    public ID! : number;
-    public Date! : Date;
+    public id! : number;
+    public date! : Date;
+    public roomNumber! : number;
+    public ordersCount! : number;
+    public seatsCount! : number;
 }
