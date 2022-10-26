@@ -23,7 +23,15 @@ namespace TiketsTerminal.BusinessLogic
 
         public async Task<User> AuthenticateUser(string email, string password)
         {
-            return await _us.GetForAuthenticateAsync(email, password);
+            var user = await _us.GetForAuthenticateAsync(email, password);
+            
+            if (user != null)
+            {
+                user.LastVisited = DateTime.UtcNow;
+                await _us.SaveAsync(user);
+            }
+                
+            return user;
         }
 
         public string GetJWT(User user, IOptions<AuthenticationConfiguration> options)

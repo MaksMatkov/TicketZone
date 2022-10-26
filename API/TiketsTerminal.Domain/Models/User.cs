@@ -18,6 +18,8 @@ namespace TiketsTerminal.Domain.Models
 
         public bool IsApproved { get; set; } = false;
 
+        public DateTime LastVisited { get; set; }
+
         public Enums.Role FK_Role { get; set; }
 
         public IEnumerable<TicketOrder> TicketOrders { get; set; }

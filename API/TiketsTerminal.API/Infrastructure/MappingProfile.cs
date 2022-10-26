@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TiketsTerminal.API.DTOs;
+using TiketsTerminal.Domain.Enums;
 using TiketsTerminal.Domain.Models;
 
 namespace TiketsTerminal.API.Infrastructure
@@ -78,7 +79,7 @@ namespace TiketsTerminal.API.Infrastructure
                 .ForMember("Date", el => el.MapFrom(v => v.Date))
                 .ForMember("RoomNumber", el => el.MapFrom(v => (v.Room != null) ? v.Room.Number : 0))
                 .ForMember("RoomId", el => el.MapFrom(v => (v.Room != null) ? v.Room.ID : 0))
-                .ForMember("OrdersCount", el => el.MapFrom(v => (v.TicketOrders != null) ? v.TicketOrders.Count() : 0))
+                .ForMember("OrdersCount", el => el.MapFrom(v => (v.TicketOrders != null) ? v.TicketOrders.Where(el => el.Status != Status.Rejected).Count() : 0))
                 .ForMember("SeatsCount", el => el.MapFrom(v => (v.Room != null) ? v.Room.SeatsCount : 0))
                 .ForMember("FilmId", el => el.MapFrom(v => v.FK_Film))
                 .ReverseMap();

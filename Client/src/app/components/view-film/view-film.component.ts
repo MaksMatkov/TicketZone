@@ -6,6 +6,9 @@ import { ViewingTimeService } from 'src/app/common/services/ViewingTimeService/v
 import { ViewingTime } from './../../common/models/viewingTimes/ViewingTime';
 import { TicketOrderService } from './../../common/services/ticketOrderService/ticket-order.service';
 import { AddTicketOrder } from './../../common/models/order/AddTicketOrder';
+import { AuthService } from 'src/app/common/services/authService/auth.service';
+import { Role } from 'src/app/common/enums/Role';
+import { SelectorMatcher } from '@angular/compiler';
 
 @Component({
   selector: 'app-view-film',
@@ -19,8 +22,9 @@ export class ViewFilmComponent implements OnInit {
   dateTime!: Date | null;
   selectedView! : ViewingTime;
   showMoreInfo = false;
+  disabledOrderBtn = false;
 
-  constructor(public route: ActivatedRoute, public _fs :FilmService, public _vts :ViewingTimeService, public _os : TicketOrderService, private router: Router) { }
+  constructor(public route: ActivatedRoute, public _fs :FilmService, public _vts :ViewingTimeService, public _os : TicketOrderService, private router: Router,public _as: AuthService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -39,6 +43,8 @@ export class ViewFilmComponent implements OnInit {
 
   bindData(data : Film){
     this.film = data;
+    if(this._as.currentUserValue && this._as.currentUserValue.role == Role.Admin)
+      this.disabledOrderBtn = true; 
   } 
 
   selectView(id : number){
@@ -53,10 +59,16 @@ export class ViewFilmComponent implements OnInit {
   }
 
   madeOrder(){
-    if(confirm("Are you sure?")){
-      var order = new AddTicketOrder();
-      order.FilmViewingTimeId = this.selectedView.id;
-      this._os.Save(order).subscribe(data =>  {alert("Done!"); this.selectView(this.selectedView.id)}, err => alert(err.message))
+    if(this._as.currentUserValue && this._as.currentUserValue.role == Role.User){
+      if(confirm("Are you sure?")){
+        var order = new AddTicketOrder();
+        order.FilmViewingTimeId = this.selectedView.id;
+        this._os.Save(order).subscribe(data =>  {alert("Done!"); this.selectView(this.selectedView.id)}, err => alert(err.message))
+      }
+    }
+    else{
+      alert("Please Log In!")
+      this.router.navigate(['/login'])
     }
   }
 

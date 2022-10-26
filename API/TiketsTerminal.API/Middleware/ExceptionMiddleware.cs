@@ -39,8 +39,8 @@ namespace TiketsTerminal.API.Middleware
             context.Response.ContentType = "application/json";
             await context.Response.WriteAsync(new ErrorDetails()
             {
-                StatusCode = context.Response.StatusCode,
-                Message = message
+                statusCode = context.Response.StatusCode,
+                message = message
             }.ToString());
         }
     }

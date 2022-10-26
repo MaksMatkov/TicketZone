@@ -6,9 +6,10 @@
                 <div class="order-row-controls">
                     <div *ngIf="order.status == status.NeedApprove">In Approve Proc... </div>
                     <div *ngIf="order.status == status.Approved">Approved </div>
-                    <button mat-raised-button (click)="reject(order.id)" *ngIf="order.status != status.Rejected && order.status != status.NeedReject" color="warn">Reject</button>
+                    <button mat-raised-button (click)="reject(order.id)" *ngIf="order.status != status.Rejected && order.status != status.NeedReject && order.status != status.RejectedDeclined" color="warn">Reject</button>
                     <div *ngIf="order.status == status.Rejected">Rejected</div>
                     <div *ngIf="order.status == status.NeedReject">In Reject Proc...</div>
+                    <div *ngIf="order.status == status.RejectedDeclined">Rejected Declined</div>
                 </div>
             </div>
         </mat-list-option>

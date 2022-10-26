@@ -24,15 +24,14 @@
                 <h1>Not Have Any Sessions</h1>
             </div>
         </div>
-        <div *ngIf="showMoreInfo">
+        <div *ngIf="showMoreInfo" class="view-info">
             <div>Time: {{selectedView.date | date}}</div>
             <div>Room: {{ selectedView.roomNumber }}</div>
             <div>Free Seats Count: {{ selectedView.seatsCount - selectedView.ordersCount }}</div>
-            <div>
+            <div class="view-info-control">
                 <button mat-raised-button (click)="backClick()">Back</button>
-                <button mat-raised-button (click)="madeOrder()" color="accent">Order ticket</button>
+                <button mat-raised-button (click)="madeOrder()" [disabled]="disabledOrderBtn" color="accent">Order ticket</button>
             </div>
-
         </div>
     </div>
 

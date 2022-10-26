@@ -54,7 +54,7 @@ namespace TiketsTerminal.BusinessLogic.Services
                 .FirstOrDefaultAsync(el => el.ID == item.FK_Film_Viewing_Time);
             if (viewingTime == null)
                 throw new Exception("Film viewing time not found!");
-            if(viewingTime.TicketOrders.Count() == viewingTime.Room.SeatsCount)
+            if(viewingTime.TicketOrders.Where(el => el.Status != Status.Rejected).Count() == viewingTime.Room.SeatsCount)
                 throw new Exception("Free seats ended!");
 
             await base.SaveAsync(item);

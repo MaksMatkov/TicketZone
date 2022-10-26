@@ -126,6 +126,7 @@ namespace TiketsTerminal.API
 
             //serv
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IFilmService, FilmService>();
             services.AddScoped<IRoomService, RoomService>();
             services.AddScoped<IFilmViewingTimeService, FilmViewingTimeService>();

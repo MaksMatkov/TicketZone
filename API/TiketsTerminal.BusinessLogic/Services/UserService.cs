@@ -26,6 +26,11 @@ namespace TiketsTerminal.BusinessLogic.Services
             return user;
         }
 
+        public async Task<User> GetByEmailAsync(string email)
+        {
+            return await _db.User.FirstOrDefaultAsync(el => el.Email == email);
+        }
+
         public async Task<User> GetForAuthenticateAsync(string email, string password)
         {
             return await _db.User.FirstOrDefaultAsync(el => el.Email == email && el.Password == password && el.IsApproved);

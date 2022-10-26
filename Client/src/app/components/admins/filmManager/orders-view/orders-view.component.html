@@ -4,14 +4,18 @@
             <div class="row">
                 <div> {{order.creationDate | date}}</div>
                 <div class="row-controls" *ngIf="order.status != status.Rejected">
-                    <button mat-raised-button (click)="setStatus(order.id, order.status == status.NeedReject ? status.RejectedDeclined : status.Rejected)" *ngIf="order.status == status.NeedReject || order.status == status.NeedApprove" color="warn">Reject</button>
-                    <button mat-raised-button (click)="setStatus(order.id, status.Approved)" *ngIf="order.status == status.NeedApprove" color="accent">Approve</button>
+                    <button mat-raised-button (click)="setStatus(order.id, status.RejectedDeclined)" *ngIf="order.status == status.NeedReject" color="warn">Decline Reject</button>
+                    <button mat-raised-button (click)="setStatus(order.id, status.Rejected)" *ngIf="order.status == status.NeedReject" color="warn">Reject</button>
+                    <button mat-raised-button (click)="setStatus(order.id, status.Approved)" *ngIf="order.status == status.NeedApprove || order.status == status.RejectedDeclined" color="accent">Approve</button>
                 </div>
                 <div class="row-controls" *ngIf="order.status == status.Rejected">
                     Rejected
                 </div>
                 <div class="row-controls" *ngIf="order.status == status.Approved">
                     Approved
+                </div>
+                <div class="row-controls" *ngIf="order.status == status.RejectedDeclined">
+                    Rejected Declined (need approve)
                 </div>
             </div>
         </mat-list-option>

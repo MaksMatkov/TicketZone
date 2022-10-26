@@ -38,6 +38,10 @@ namespace TiketsTerminal.Infrastucture.ModelsConfigurations
                .Property(p => p.Password)
                .HasColumnName("Password")
                .IsRequired();
+            builder
+               .Property(p => p.LastVisited)
+               .HasColumnName("Last_Visited")
+               .IsRequired();
         }
     }
 }

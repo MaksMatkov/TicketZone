@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiketsTerminal.API", "Tiket
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiketsTerminal.Domain", "..\TiketsTerminal.Domain\TiketsTerminal.Domain.csproj", "{4809ADA2-8F12-4827-BFDE-30C0784B600C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiketsTerminal.Infrastucture", "..\TiketsTerminal.Infrastucture\TiketsTerminal.Infrastucture.csproj", "{A00D987E-23C4-4BA6-9863-6436DD439B45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiketsTerminal.Infrastucture", "..\TiketsTerminal.Infrastucture\TiketsTerminal.Infrastucture.csproj", "{A00D987E-23C4-4BA6-9863-6436DD439B45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiketsTerminal.BusinessLogic", "..\TiketsTerminal.BusinessLogic\TiketsTerminal.BusinessLogic.csproj", "{AF6CBAF6-1545-4213-8C51-ECB110D4AB10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiketsTerminal.BusinessLogic", "..\TiketsTerminal.BusinessLogic\TiketsTerminal.BusinessLogic.csproj", "{AF6CBAF6-1545-4213-8C51-ECB110D4AB10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

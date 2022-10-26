@@ -11,5 +11,6 @@ namespace TiketsTerminal.BusinessLogic.Abstraction
     {
         public Task<User> GetForAuthenticateAsync(string email, string password);
         public Task<User> ApproveUserAsync(int id);
+        public Task<User> GetByEmailAsync(string email);
     }
 }
