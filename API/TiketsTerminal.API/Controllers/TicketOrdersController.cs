@@ -10,6 +10,7 @@ using TiketsTerminal.API.Helpers;
 using TiketsTerminal.BusinessLogic.Abstraction;
 using TiketsTerminal.Domain.Enums;
 using TiketsTerminal.Domain.Models;
+using TiketsTerminal.Domain.Models.NotEntity;
 
 namespace TiketsTerminal.API.Controllers
 {
@@ -47,7 +48,7 @@ namespace TiketsTerminal.API.Controllers
 
         [Authorize]
         [HttpGet("myOrders")]
-        public async Task<List<GetTicketOrderResponse>> GetOrders()
+        public async Task<List<GetTicketOrderLiteResponse>> GetOrders()
         {
             var userId = IdentityHelper.GetSub(User);
             if (userId == 0)
@@ -55,7 +56,7 @@ namespace TiketsTerminal.API.Controllers
 
             var result = await _TicketOrderService.GetTicketsOrdersByUserAsync(userId);
 
-            return _mapper.Map<List<TicketOrder>, List<GetTicketOrderResponse>>(result.ToList());
+            return _mapper.Map<List<TicketOrder>, List<GetTicketOrderLiteResponse>>(result.ToList());
 
         }
 
@@ -75,12 +76,9 @@ namespace TiketsTerminal.API.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<List<GetTicketOrderResponse>> Get()
+        public async Task<List<OrderFullInfoModel>> Get()
         {
-           
-            var result = await _TicketOrderService.GetAsync();
-
-            return _mapper.Map<List<TicketOrder>, List<GetTicketOrderResponse>>(result.ToList());
+            return await _TicketOrderService.GetFullTicketsOrderInfoAsync();
         }
 
         [HttpPost("{id}/setStatus/{status}")]

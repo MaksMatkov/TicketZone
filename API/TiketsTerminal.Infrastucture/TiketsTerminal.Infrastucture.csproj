@@ -14,4 +14,8 @@
     <ProjectReference Include="..\TiketsTerminal.Domain\TiketsTerminal.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MigrationsSQL\" />
+  </ItemGroup>
+
 </Project>

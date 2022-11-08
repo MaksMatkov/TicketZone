@@ -45,6 +45,7 @@ import { CommonModule } from '@angular/common';
 import { AlertComponent } from './common/dialogs/alert/alert.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { OrderStatusPipe } from './common/pipes/order-status.pipe';
 
 
 
@@ -85,7 +86,8 @@ export function tokenGetter() {
     OrdersComponent,
     AdminControlComponent,
     RoomEditComponent,
-    AlertComponent
+    AlertComponent,
+    OrderStatusPipe
   ],
   imports: [
     BrowserModule,

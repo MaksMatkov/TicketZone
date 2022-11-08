@@ -16,11 +16,12 @@ namespace TiketsTerminal.Infrastucture.ModelsConfigurations
             builder.ToTable("T_Room", schema: "fbd");
 
             builder.HasKey(el => el.ID);
+            builder.HasIndex(el => el.Number).IsUnique();
 
             builder.HasMany<FilmViewingTime>(el => el.FilmViewingTimes).WithOne(el => el.Room).HasForeignKey(el => el.FK_Room);
 
             builder.Property(p => p.ID)
-                .HasColumnName("PK_Film")
+                .HasColumnName("PK_Room")
                 .UseIdentityColumn(1, 1)
                 .ValueGeneratedOnAdd();
             builder.Property(p => p.Number)

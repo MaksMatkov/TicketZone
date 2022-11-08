@@ -5,6 +5,7 @@ import { AuthenticationGuardAdminService } from './common/services/authGuardServ
 import { AdminControlComponent } from './components/admins/admin-control/admin-control.component';
 import { FilmEditComponent } from './components/admins/filmManager/film-edit/film-edit.component';
 import { FilmViewComponent } from './components/admins/filmManager/film-view/film-view.component';
+import { OrdersViewComponent } from './components/admins/filmManager/orders-view/orders-view.component';
 import { ViewsTimesViewComponent } from './components/admins/filmManager/views-times-view/views-times-view.component';
 import { RoomEditComponent } from './components/admins/roomManager/room-edit/room-edit.component';
 import { RoomListComponent } from './components/admins/roomManager/room-list/room-list.component';
@@ -28,13 +29,12 @@ const routes: Routes = [
     {path: 'room-edit/:id', component:RoomEditComponent},
     { path: 'room-edit', component: RoomEditComponent },
     { path: 'film-edit/:id', component: FilmEditComponent },
-    { path: 'film-edit', component: FilmEditComponent }
+    { path: 'film-edit', component: FilmEditComponent },
+    { path: 'orders', component: OrdersViewComponent}
   ] },
 
-  
-
   { path: 'film/:id', component: ViewFilmComponent },
-  {path:"orders", component: OrdersComponent, canActivate: [AuthenticationGuardClientService]}
+  { path:"orders", component: OrdersComponent, canActivate: [AuthenticationGuardClientService]}
 ];
 
 @NgModule({

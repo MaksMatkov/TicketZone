@@ -16,6 +16,7 @@ namespace TiketsTerminal.Infrastucture.ModelsConfigurations
             builder.ToTable("T_User", schema: "fbd");
 
             builder.HasKey(p => p.ID);
+            builder.HasIndex(p => p.Email).IsUnique();
 
             builder.HasMany<TicketOrder>(el => el.TicketOrders).WithOne(el => el.User).HasForeignKey(el => el.FK_User);
 

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TiketsTerminal.Domain.Enums;
 using TiketsTerminal.Domain.Models;
+using TiketsTerminal.Domain.Models.NotEntity;
 using TiketsTerminal.Infrastucture.ModelsConfigurations;
 
 namespace TiketsTerminal.Infrastucture.Infrastructure
@@ -35,6 +36,8 @@ namespace TiketsTerminal.Infrastucture.Infrastructure
             builder.ApplyConfiguration(new RoomConfiguration());
             builder.ApplyConfiguration(new TicketOrderConfiguration());
             builder.ApplyConfiguration(new FilmViewingTimeConfiguration());
+
+            builder.Entity<OrderFullInfoModel>().ToTable(nameof(OrderFullInfoModel), t => t.ExcludeFromMigrations());
         }
 
         public DbSet<Film> Film { get; set; }
@@ -42,5 +45,6 @@ namespace TiketsTerminal.Infrastucture.Infrastructure
         public DbSet<TicketOrder> TicketOrder { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<FilmViewingTime> FilmViewingTime { get; set; }
+        public DbSet<OrderFullInfoModel> OrderFullInfoModel { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TiketsTerminal.Infrastucture.Migrations
 {
-    public partial class tickets : Migration
+    public partial class main : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,14 +32,14 @@ namespace TiketsTerminal.Infrastucture.Migrations
                 schema: "fbd",
                 columns: table => new
                 {
-                    PK_Film = table.Column<int>(type: "int", nullable: false)
+                    PK_Room = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Number = table.Column<int>(type: "int", nullable: false),
                     Seats_Count = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_T_Room", x => x.PK_Film);
+                    table.PrimaryKey("PK_T_Room", x => x.PK_Room);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,7 +50,7 @@ namespace TiketsTerminal.Infrastucture.Migrations
                     PK_User = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsApproved = table.Column<bool>(type: "bit", nullable: false),
                     Last_Visited = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -87,7 +87,7 @@ namespace TiketsTerminal.Infrastucture.Migrations
                         column: x => x.FK_Room,
                         principalSchema: "fbd",
                         principalTable: "T_Room",
-                        principalColumn: "PK_Film",
+                        principalColumn: "PK_Room",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -135,6 +135,13 @@ namespace TiketsTerminal.Infrastucture.Migrations
                 column: "FK_Room");
 
             migrationBuilder.CreateIndex(
+                name: "IX_T_Room_Number",
+                schema: "fbd",
+                table: "T_Room",
+                column: "Number",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_T_Ticket_Order_FK_Film_Viewing_Time",
                 schema: "fbd",
                 table: "T_Ticket_Order",
@@ -145,6 +152,22 @@ namespace TiketsTerminal.Infrastucture.Migrations
                 schema: "fbd",
                 table: "T_Ticket_Order",
                 column: "FK_User");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_T_User_Email",
+                schema: "fbd",
+                table: "T_User",
+                column: "Email",
+                unique: true);
+
+            //call SQL code from files
+            System.IO.DirectoryInfo d = new System.IO.DirectoryInfo(@"..\TiketsTerminal.Infrastucture\MigrationsSQL"); //Assuming Test is your Folder
+
+            System.IO.FileInfo[] Files = d.GetFiles("*.sql"); //Getting Text files
+            foreach (System.IO.FileInfo file in Files)
+            {
+                migrationBuilder.Sql($"{System.IO.File.ReadAllText(file.FullName)}");
+            }
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

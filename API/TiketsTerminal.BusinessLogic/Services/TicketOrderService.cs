@@ -8,6 +8,7 @@ using TiketsTerminal.BusinessLogic.Abstraction;
 using TiketsTerminal.BusinessLogic.CustomeExceptions;
 using TiketsTerminal.Domain.Enums;
 using TiketsTerminal.Domain.Models;
+using TiketsTerminal.Domain.Models.NotEntity;
 using TiketsTerminal.Infrastucture.Infrastructure;
 
 namespace TiketsTerminal.BusinessLogic.Services
@@ -78,6 +79,11 @@ namespace TiketsTerminal.BusinessLogic.Services
         public async Task<List<TicketOrder>> GetTicketsOrdersByFilmViewingTimeAsync(int FilmViewingTimeId)
         {
             return await _db.TicketOrder.Where(el => el.FK_Film_Viewing_Time == FilmViewingTimeId).ToListAsync();
+        }
+
+        public async Task<List<OrderFullInfoModel>> GetFullTicketsOrderInfoAsync()
+        {
+            return await _db.OrderFullInfoModel.FromSqlRaw($"EXECUTE fbd.Get_Full_Order_Model").ToListAsync();
         }
     }
 }

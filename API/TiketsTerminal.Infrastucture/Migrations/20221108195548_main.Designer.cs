@@ -10,8 +10,8 @@ using TiketsTerminal.Infrastucture.Infrastructure;
 namespace TiketsTerminal.Infrastucture.Migrations
 {
     [DbContext(typeof(dbContext))]
-    [Migration("20221103132803_tickets")]
-    partial class tickets
+    [Migration("20221108195548_main")]
+    partial class main
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,12 +86,41 @@ namespace TiketsTerminal.Infrastucture.Migrations
                     b.ToTable("T_Film_Viewing_Time", "fbd");
                 });
 
+            modelBuilder.Entity("TiketsTerminal.Domain.Models.NotEntity.OrderFullInfoModel", b =>
+                {
+                    b.Property<DateTime>("creationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("filmName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("filmViewingTimeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("roomNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("userEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("userId")
+                        .HasColumnType("int");
+
+                    b.ToTable("OrderFullInfoModel", t => t.ExcludeFromMigrations());
+                });
+
             modelBuilder.Entity("TiketsTerminal.Domain.Models.Room", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("PK_Film")
+                        .HasColumnName("PK_Room")
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -105,6 +134,9 @@ namespace TiketsTerminal.Infrastucture.Migrations
                         .HasColumnName("Seats_Count");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("Number")
+                        .IsUnique();
 
                     b.ToTable("T_Room", "fbd");
                 });
@@ -155,7 +187,7 @@ namespace TiketsTerminal.Infrastucture.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("Email");
 
                     b.Property<int>("FK_Role")
@@ -180,6 +212,9 @@ namespace TiketsTerminal.Infrastucture.Migrations
                         .HasColumnName("Password");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("T_User", "fbd");
                 });

@@ -110,7 +110,7 @@ namespace TiketsTerminal.API.Infrastructure
                 .ForMember("id", el => el.MapFrom(v => v.ID))
                 .ReverseMap();
 
-            CreateMap<TicketOrder, GetTicketOrderResponse>()
+            CreateMap<TicketOrder, GetTicketOrderLiteResponse>()
                 .ForMember("id", el => el.MapFrom(v => v.ID))
                 .ForMember("userId", el => el.MapFrom(v => v.FK_User))
                 .ForMember("filmViewingTimeId", el => el.MapFrom(v => v.FK_Film_Viewing_Time))
