@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TiketsTerminal.Domain.Enums;
 using TiketsTerminal.Domain.Models;
 using TiketsTerminal.Infrastucture.ModelsConfigurations;
 
@@ -13,15 +14,17 @@ namespace TiketsTerminal.Infrastucture.Infrastructure
     {
         public dbContext(ConnectionStringsConfiguration ConnectionStringsConfiguration) : base()
         {
-            this.connectionString = ConnectionStringsConfiguration.Course;
+            this._ConnectionStringsConfiguration = ConnectionStringsConfiguration;
         }
 
-        private string connectionString { get; set; }
+        private ConnectionStringsConfiguration _ConnectionStringsConfiguration { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlite(this.connectionString);
-            optionsBuilder.UseSqlServer(this.connectionString);
+            if(_ConnectionStringsConfiguration.DbType == DbType.sqlLite)
+                optionsBuilder.UseSqlite(_ConnectionStringsConfiguration.sqlLiteConnectionString);
+            else
+                optionsBuilder.UseSqlServer(_ConnectionStringsConfiguration.msSqlConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

@@ -107,7 +107,7 @@ namespace TiketsTerminal.API
 
         private void SetupDependencyInjection(IServiceCollection services)
         {
-            var connectionStrings = Configuration.GetSection("ConnectionStrings").Get<ConnectionStringsConfiguration>();
+            var _ConnectionStringsConfiguration = Configuration.GetSection("ConnectionStrings").Get<ConnectionStringsConfiguration>();
 
             services.AddDbContext<dbContext>(o =>
             {
@@ -122,7 +122,7 @@ namespace TiketsTerminal.API
             services.AddSingleton(mapper);
 
             //add di
-            services.AddSingleton(connectionStrings);
+            services.AddSingleton(_ConnectionStringsConfiguration);
 
 
             services.AddScoped<IUserService, UserService>();

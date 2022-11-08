@@ -22,4 +22,10 @@ namespace TiketsTerminal.Domain.Enums
         Rejected = 4,
         RejectedDeclined = 5
     }
+
+    public enum DbType
+    {
+        msSql = 0,
+        sqlLite = 1
+    }
 }
