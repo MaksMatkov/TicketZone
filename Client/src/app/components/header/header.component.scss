@@ -1,37 +1,71 @@
-mat-progress-bar{
+mat-progress-bar {
     position: absolute;
     top: 0px;
     width: 100%;
+    z-index: 99;
+    color: black;
 }
 
-header{
-    background-color: var(--sky);
+header {
+    background: rgb(255, 255, 255);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.9px);
+    -webkit-backdrop-filter: blur(3.9px);
+    border: 0px solid rgba(20, 18, 18, 1);
+
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: -23px;
     width: 100%;
     z-index: 999;
-    // justify-content: flex-end;
     flex-direction: row;
     flex-wrap: nowrap;
 
-    .header-text{
-        color: white;
-    }
-
-    mat-toolbar{
-        background-color: var(--sky);
-    }
-    .controls{
+    .header-text {
+        color: rgb(0, 0, 0);
         display: flex;
-    width: 100%;
-    margin-right: 15px;
-    justify-content: flex-end;
-    align-items: center;
+        font-size: larger;
+        width: auti;
+        cursor: pointer;
+        align-items: center;
 
-       button{
-        margin-left: 8px;
-       }
+        mat-icon {
+            margin-right: 5px;
+        }
+    }
+
+    mat-toolbar {
+        background-color: transparent;
+    }
+
+    .controls {
+        display: flex;
+        width: 100%;
+        margin-right: 15px;
+        justify-content: flex-end;
+        align-items: center;
+
+        button {
+            margin-left: 8px;
+        }
 
     }
+
+    .cut {
+        width: 1px;
+        background: grey;
+        height: 20px;
+        margin: 0 10px
+    }
+}
+
+.mat-toolbar-single-row {
+    display: flex;
+    box-sizing: border-box;
+    /* padding: 0 16px; */
+    width: 100%;
+    padding-left: 24px;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
 }

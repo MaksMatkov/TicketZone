@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TiketsTerminal.BusinessLogic.Abstraction;
+using TiketsTerminal.BusinessLogic.CustomeExceptions;
 using TiketsTerminal.BusinessLogic.Interfaces;
 using TiketsTerminal.Domain.Models;
 
@@ -27,6 +28,8 @@ namespace TiketsTerminal.BusinessLogic
             
             if (user != null)
             {
+                if (!user.IsApproved)
+                    throw new NotApprovedException("Your account is not approved.", user.ID);
                 user.LastVisited = DateTime.UtcNow;
                 await _us.SaveAsync(user);
             }

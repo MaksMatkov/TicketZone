@@ -11,5 +11,6 @@ namespace TiketsTerminal.BusinessLogic.Abstraction
     {
         public Task<Room> GetRoomByNumberAsync(int number);
         public Room GetRoomByNumber(int number);
+        public Task<Room> GetDeepDataAsync(params object[] keyValues);
     }
 }

@@ -7,8 +7,8 @@ namespace TiketsTerminal.API.DTOs
 {
     public class GetRoomResponse
     {
-        public int ID { get; set; }
-        public int Number { get; set; }
-        public int SeatsCount { get; set; }
+        public int id { get; set; }
+        public int number { get; set; }
+        public int seatsCount { get; set; }
     }
 }

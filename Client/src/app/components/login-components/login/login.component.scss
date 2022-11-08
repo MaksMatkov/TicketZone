@@ -1,12 +1,24 @@
 .login-form {
+    height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    
+    .login-form-block{
+        width: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: #ffffff;
+        border-radius: 5px;
+    }
 
     .card {
         display: flex;
         margin: 60px;
-        width: 33%;
+        width: 80%;
         flex-direction: column;
     }
 

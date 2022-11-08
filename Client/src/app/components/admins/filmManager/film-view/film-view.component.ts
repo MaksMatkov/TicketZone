@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FilmLite } from 'src/app/common/models/film/FilmLite';
 import { FilmService } from 'src/app/common/services/filmService/film.service';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-film-view',
@@ -14,14 +16,21 @@ export class FilmViewComponent implements OnInit {
   showViewingTime = false;
   filmIdViewingTime = 0;
 
+  displayedColumns: string[] = ['select', 'name'];
+  dataSource! : MatTableDataSource<FilmLite>;
+  selection = new SelectionModel<FilmLite>(true, []);
+
   constructor(public _fs : FilmService) { }
 
   ngOnInit(): void {
-    this.filmList = this._fs.GetAll();
+    this.reload();
   }
 
   reload(){
-    this.filmList = this._fs.GetAll();
+    this._fs.GetAll().subscribe(data => {
+      this.dataSource = new MatTableDataSource<FilmLite>(data);
+      this.selection.clear()
+    });
   }
 
   switchVTInfo(id : number){
@@ -36,10 +45,22 @@ export class FilmViewComponent implements OnInit {
 
   onDeleteClick(id : number){
     if(confirm("Are you sure?"))
-      this._fs.Delete(id).subscribe((data) => {this.reload()}, err => alert("Something went wrong!"))
+      this._fs.Delete(id).subscribe((data) => {this.reload()})
   }
 
 
  
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
+  }
 
 }

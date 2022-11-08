@@ -1,5 +1,5 @@
 export class AddViewingTime {
-    public FK_Film! : number;
-    public Date! : Date;
-    public FK_Room! : number;
+    public filmId! : number;
+    public date! : Date;
+    public roomId! : number;
 }

@@ -17,4 +17,9 @@ export class UserService extends BaseRestService<User, User, AddUser> {
     return this.http.post(this.apiUrl + this.endPoint + `/approve/${id}`, {}).pipe(
       map(res => res));
   }
+
+  public Register(user : AddUser) : Observable<any>{
+    return this.http.post(this.apiUrl + this.endPoint + `/register`, user).pipe(
+      map(res => res));
+  }
 }

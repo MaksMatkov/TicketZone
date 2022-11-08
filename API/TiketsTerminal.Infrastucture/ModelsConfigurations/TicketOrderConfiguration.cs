@@ -22,6 +22,7 @@ namespace TiketsTerminal.Infrastucture.ModelsConfigurations
 
             builder.Property(p => p.ID)
                 .HasColumnName("PK_Ticket_Order")
+                .UseIdentityColumn(1, 1)
                 .ValueGeneratedOnAdd();
             builder.Property(p => p.FK_Film_Viewing_Time)
                 .HasColumnName("FK_Film_Viewing_Time");

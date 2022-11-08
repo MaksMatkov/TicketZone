@@ -7,7 +7,7 @@ namespace TiketsTerminal.API.DTOs
 {
     public class AddFilmViewingTimeResponse
     {
-        public int ID { get; set; }
-        public DateTime Date { get; set; }
+        public int id { get; set; }
+        public DateTime date { get; set; }
     }
 }

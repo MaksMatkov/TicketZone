@@ -2,20 +2,20 @@
 <header>
     <mat-toolbar>
         
-        <span class="header-text"><mat-icon>important_devices</mat-icon> Cinema Tickets</span>
+        <span class="header-text" (click)="clickMain()"><mat-icon>important_devices</mat-icon> Cinema Tickets</span>
         <div class="controls">
-            <button mat-raised-button color="warn" (click)="clickLogOut()" *ngIf="_as.currentUserValue">Log Out</button>
-            <button mat-raised-button (click)="clickLogIn()" color="primary" *ngIf="!_as.currentUserValue">Log
-                In</button>
+           
             
-            <button mat-raised-button (click)="clickMyOrders()" color="primary" *ngIf="_as.currentUserValue && _as.currentUserValue.role == role.User">My Orders</button>
-
-            <button mat-mini-fab (click)="clickSettings()" *ngIf="_as.currentUserValue && _as.currentUserValue.role == role.Admin"  color="primary">
+            <button mat-button (click)="clickMyOrders()"  *ngIf="_as.currentUserValue && _as.currentUserValue.role == role.User">My Orders</button>
+            <button mat-icon-button (click)="clickSettings()" *ngIf="_as.currentUserValue && _as.currentUserValue.role == role.Admin">
                 <mat-icon>settings</mat-icon>
             </button>
-            <button mat-fab (click)="clickHome()" color="primary">
+            <button mat-icon-button (click)="clickHome()">
                 <mat-icon>home</mat-icon>
             </button>
+            <div class="cut"></div>
+            <button mat-button (click)="clickLogOut()" *ngIf="_as.currentUserValue">Log Out</button>
+            <button mat-button (click)="clickLogIn()" *ngIf="!_as.currentUserValue">Log In</button>
         </div>
     </mat-toolbar>
 </header>

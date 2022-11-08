@@ -7,7 +7,7 @@ namespace TiketsTerminal.API.DTOs
 {
     public class AddRoomResponse
     {
-        public int ID { get; set; }
-        public int Number { get; set; }
+        public int id { get; set; }
+        public int number { get; set; }
     }
 }

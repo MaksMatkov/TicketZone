@@ -4,16 +4,16 @@
         <div>
             <div class="media-data">
                 <div>
-                    <img style="width: 70%;" src="{{posterForm.value}}">
+                    <img style="width: 40%;" src="{{posterForm.value}}">
                 </div>
     
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
                     <mat-label>Poster</mat-label>
                     <input matInput [formControl]="posterForm" required>
                     <mat-error *ngIf="posterForm.invalid">Invalid value</mat-error>
                 </mat-form-field>    
 
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
                     <mat-label>Trailer</mat-label>
                     <input matInput [formControl]="trailerForm" required>
                     <mat-error *ngIf="trailerForm.invalid">Invalid value</mat-error>
@@ -23,14 +23,14 @@
 
 
             <div class="text-value">
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
                     <mat-label>Name</mat-label>
-                    <input matInput placeholder="pat@example.com" [formControl]="nameForm"  required>
+                    <input matInput [formControl]="nameForm"  required>
                     <mat-error *ngIf="nameForm.invalid">Invalid value</mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
                     <mat-label>Description</mat-label>
-                    <textarea rows="30" matInput [formControl]="descriptionForm" required></textarea>
+                    <textarea rows="20" matInput [formControl]="descriptionForm" required></textarea>
                     <mat-error *ngIf="descriptionForm.invalid">Invalid value</mat-error>
                 </mat-form-field>
     
@@ -39,9 +39,6 @@
             
             
         </div>
-        
-
-
         <div>
             <button mat-stroked-button routerLink="/admin" >cancel</button>
             <button mat-stroked-button type="submit">save</button>

@@ -31,6 +31,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/admin']);
   }
 
+  clickMain(){
+    this.router.navigate(['/']);
+  }
+
   clickLogOut(){
     this._as.LogOut();
   }

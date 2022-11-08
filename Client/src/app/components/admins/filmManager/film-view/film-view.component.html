@@ -1,19 +1,54 @@
-<div>
-    <mat-selection-list #filmsGrid [multiple]="false">
-        <mat-list-option class="row" *ngFor="let film of filmList | async" [value]="film.id">
-            <div class="row">
-                <div> {{film.name}}</div>
-                <div class="row-controls">
-                    <button mat-icon-button color="primary" [routerLink]="['/film-edit', film.id]">Edit</button>
-                    <button mat-icon-button color="warn" (click)="onDeleteClick(film.id)">Delete</button>
-                    <button style="margin-left:15px;" mat-raised-button color="primary" (click)="switchVTInfo(film.id)">{{ showViewingTime && filmIdViewingTime == film.id ? "Hide View Time Info" : "Show View Time Info" }}</button>
-                </div>
-            </div>
-        </mat-list-option>
-        <mat-list-option class="add-new-b" [routerLink]="['/film-edit']"><span class="add-row"><mat-icon>add</mat-icon> Add new film</span></mat-list-option>
-    </mat-selection-list>
+<div class="table-controls">
+    <button mat-button color="primary" [disabled]="selection?.selected?.length && selection.selected.length != 1"
+        [routerLink]="['/admin/film-edit', selection.selected[0]?.id]">Edit</button>
+    <button mat-button color="warn" [disabled]="selection?.selected?.length && selection.selected.length != 1"
+        (click)="onDeleteClick(selection.selected[0].id)">Delete</button>
+    <button mat-button color="primary" [disabled]="selection?.selected?.length && selection.selected.length != 1"
+        [routerLink]="['/admin/films-viewing-time', selection.selected[0]?.id]">Edit Viewing Time</button>
+    <button mat-button color="primary" [routerLink]="['/admin/film-edit']">Add</button>
+</div>
+<div class="table-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <div *ngIf="showViewingTime">
-        <app-views-times-view [filmId]="filmIdViewingTime"></app-views-times-view>
-    </div>
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+            </td>
+        </ng-container>
+    
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+    
+        <!-- <ng-container matColumnDef="poster">
+            <th mat-header-cell *matHeaderCellDef> poster </th>
+            <td mat-cell *matCellDef="let element">
+                <div class="card-container">
+                    <div class="card-img">
+                        <img [src]="element.posterUrl">
+                    </div>
+                </div>
+            </td>
+        </ng-container> -->
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+        </tr>
+    </table>
 </div>

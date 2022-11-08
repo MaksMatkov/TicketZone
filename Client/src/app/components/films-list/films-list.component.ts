@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FilmLite } from 'src/app/common/models/film/FilmLite';

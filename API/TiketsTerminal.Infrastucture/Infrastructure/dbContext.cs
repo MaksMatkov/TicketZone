@@ -13,14 +13,15 @@ namespace TiketsTerminal.Infrastucture.Infrastructure
     {
         public dbContext(ConnectionStringsConfiguration ConnectionStringsConfiguration) : base()
         {
-            this.connectionString = ConnectionStringsConfiguration.Main;
+            this.connectionString = ConnectionStringsConfiguration.Course;
         }
 
         private string connectionString { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(this.connectionString);
+            //optionsBuilder.UseSqlite(this.connectionString);
+            optionsBuilder.UseSqlServer(this.connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

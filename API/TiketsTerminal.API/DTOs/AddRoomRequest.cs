@@ -10,10 +10,10 @@ namespace TiketsTerminal.API.DTOs
     {
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a value bigger than {1}")]
-        public int Number { get; set; }
+        public int number { get; set; }
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a value bigger than {1}")]
-        public int SeatsCount { get; set; }
+        public int seatsCount { get; set; }
     }
 }

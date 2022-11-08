@@ -7,9 +7,9 @@ namespace TiketsTerminal.API.DTOs
 {
     public class GetUserResponse
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public bool IsApproved { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string email { get; set; }
+        public bool isApproved { get; set; }
     }
 }

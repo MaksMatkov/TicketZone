@@ -9,7 +9,7 @@ namespace TiketsTerminal.API.Middleware.Models
     public class ErrorDetails
     {
         public int statusCode { get; set; }
-        public string message { get; set; }
+        public string errorMessage { get; set; }
         public override string ToString()
         {
             return JsonSerializer.Serialize(this);

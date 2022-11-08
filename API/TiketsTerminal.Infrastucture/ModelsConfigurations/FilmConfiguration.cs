@@ -23,13 +23,13 @@ namespace TiketsTerminal.Infrastucture.ModelsConfigurations
 
             builder.Property(p => p.ID)
                .HasColumnName("PK_Film")
+               .UseIdentityColumn(1,1)
                .ValueGeneratedOnAdd();
             builder.Property(p => p.Name)
                .HasColumnName("Name")
                .IsRequired();
             builder.Property(p => p.Description)
-               .HasColumnName("Description")
-               .ValueGeneratedOnAdd();
+               .HasColumnName("Description");
             builder.Property(p => p.TrailerUrl)
                .HasColumnName("Trailer_Url")
                .IsRequired();

@@ -1,15 +1,44 @@
-<div>
-    <mat-selection-list #usersGrid [multiple]="false">
-        <mat-list-option class="row" *ngFor="let user of usersList | async" [value]="user.id">
-            <div class="row">
-                <div style="display:flex; width:30%;justify-content: space-between;">
-                    <div> {{user.name}} </div>
-                    <div> {{user.email}}</div>
-                </div>
-                <div>
-                    <button mat-raised-button *ngIf="!user.isApproved" (click)="approve(user.id)" color="primary">Approve</button>
-                </div>
-            </div>
-        </mat-list-option>
-    </mat-selection-list>
+<div class="">
+    <button mat-button color="primary" [disabled]="!(selection?.selected?.length 
+    && selection.selected.length == 1 && !selection.selected[0].isApproved)"
+        (click)="approve(selection.selected[0]?.id)">Approve</button>
+</div>
+<div class="table-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+            </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> status </th>
+            <td mat-cell *matCellDef="let element"> {{element.isApproved ? 'APPROVED' : 'NEED APPROVE'}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+        </tr>
+    </table>
 </div>

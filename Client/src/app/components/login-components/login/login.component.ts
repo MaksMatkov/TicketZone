@@ -38,8 +38,7 @@ export class LoginComponent implements OnInit {
         newUser.password = this.getFormFiledValue("password");
         newUser.email = this.getFormFiledValue("email");
 
-        console.log(newUser)
-        this._us.Save(newUser).subscribe(res => this.router.navigate(['/']), err => {alert("Something went wrong!")})
+        this._us.Register(newUser).subscribe(res => {alert("Done. Waite for approve"); this.router.navigate(['/']);})
         return;
       }
 
@@ -48,7 +47,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/admin']);
         else
           this.router.navigate(['/']);
-      }, err => { alert("Invalid User Data") })
+      })
     }
   }
 

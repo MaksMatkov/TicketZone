@@ -53,7 +53,7 @@ namespace TiketsTerminal.API.Controllers
             if (userId == 0)
                 throw new Exception("Not Allow!");
 
-            var result = await _TicketOrderService.GetUserOrdersAsync(userId);
+            var result = await _TicketOrderService.GetTicketsOrdersByUserAsync(userId);
 
             return _mapper.Map<List<TicketOrder>, List<GetTicketOrderResponse>>(result.ToList());
 
@@ -87,13 +87,7 @@ namespace TiketsTerminal.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<bool> SetStatus(int id, Status status)
         {
-            var order = await _TicketOrderService.GetByKeysAsync(id);
-            if(order == null)
-                throw new Exception("Not Found!");
-
-            order.Status = status;
-            await _TicketOrderService.SaveAsync(order);
-
+            await _TicketOrderService.SetStatusAsync(id, status);
             return true;
         }
 

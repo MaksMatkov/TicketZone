@@ -1,64 +1,80 @@
-.search-field {
-    width: 60%;
+.films-grid {
+    background-color: transparent;
+    margin: 15px;
+    margin-top: 30px;
+
+
 }
 
-.search-bar{
-    width: 100%;
+
+
+.card {
     display: flex;
-    justify-content: center;
-    padding-top: 10px;
-}
+    flex-direction:column;
+    justify-content: normal;
+    align-items: center;
 
-.films-grid{
-    background-color: white;
-}
-
-.film-cart{
-    margin: 20px;
-    overflow: hidden;
-    background-color: var(--mist);
-    border-radius: 20px;
+    width: 90%;
     height: 80%;
-    width: 100%;
-    display: flex;
-    transition: transform 0.5s ease;
-    transition-property: box-shadow, transform;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
     cursor: pointer;
+    
 
-    &:hover {
-        transform: scale(1.05);
-        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-    }
+    transition: all 0.7s;
+    background: white;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  
+  
 
-    .film-poster{
+    &:hover img{
         width: 100%;
+        filter: brightness(0.8) !important;
     }
 
-    .film-name{
-        position: relative;
-        bottom: 13%;
-        padding: 8px;
-        margin-bottom: 12px;
-        /* height: 100px; */
-        text-align: center;
-        background-color: black;
+    &:hover .card-container{
+        width: 100%;
+        height:  70%;
+    }
+    &:hover .card-name{
+        display: flex;
+        color: rgb(0 0 0);
+    }
+
+    .card-container{
+        width: 100%;
+        height:  100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.6s;
+
+        .card-img{
+            width: 80%;
+            height: 80%;
+            overflow: hidden;
+            border-radius: 6px;
+            img{
+                width: 100%;
+                filter: brightness(1);
+                transition: all 0.8s;
+            }
+        }
+    }
+    .card-name{
+        width: 80%;
+        height: 30%;
+        display: flex;
+        align-items: center;
+        background-color: rgb(255, 255, 255);
+        font-size: large;
         color: white;
-        display: block;
-        width: 100%;
+        letter-spacing: 3px;
+        flex-direction: column;
+        justify-content: space-evenly;
     }
-}
 
-
-.cart-header{
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-    text-align: center;
-    background-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    .mat-button-wrapper{
+        color: white !important;
+    }
 }

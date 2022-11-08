@@ -4,3 +4,28 @@
     text-align: center;
 }
 
+table{
+    width: 100%;
+}
+
+.card-container{
+    width: 30%;
+    height:  100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.6s;
+
+    .card-img{
+        width: 50%;
+        height: 80%;
+        overflow: hidden;
+        border-radius: 6px;
+        img{
+            width: 100%;
+            filter: brightness(1);
+            transition: all 0.8s;
+        }
+    }
+}
+

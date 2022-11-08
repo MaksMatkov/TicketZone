@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TiketsTerminal.API.DTOs;
 using TiketsTerminal.BusinessLogic.Abstraction;
+using TiketsTerminal.BusinessLogic.CustomeExceptions;
 using TiketsTerminal.Domain.Models;
 
 namespace TiketsTerminal.API.Controllers
@@ -32,15 +33,21 @@ namespace TiketsTerminal.API.Controllers
             return _mapper.Map<List<Room>, List<GetRoomResponse>>(rooms.ToList());
         }
 
+        [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<GetRoomResponse> Get(int id)
+        {
+            var rooms = await _roomService.GetByKeysAsync(id);
+
+            return _mapper.Map<Room, GetRoomResponse>(rooms);
+        }
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<AddRoomResponse> Add(AddRoomRequest room)
         {
-            var _oldRoom = await _roomService.GetRoomByNumberAsync(room.Number);
-            if (_oldRoom != null && _oldRoom.ID > 0)
-                throw new Exception("Room number must be unique!");
-
             var _room = _mapper.Map<AddRoomRequest, Room>(room);
+
             await _roomService.SaveAsync(_room);
 
             return _mapper.Map<Room, AddRoomResponse>(_room);
@@ -50,14 +57,9 @@ namespace TiketsTerminal.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<AddRoomResponse> Update(int id, AddRoomRequest room)
         {
-            var _room = await _roomService.GetByKeysAsync(id);
-            if (_room == null)
-                throw new Exception("Room not found!");
-
             var _roomNew = _mapper.Map<AddRoomRequest, Room>(room);
-            _roomNew.ID = _room.ID;
 
-            await _roomService.SaveAsync(_roomNew);
+            await _roomService.UpdateAsync(_roomNew, id);
 
             return _mapper.Map<Room, AddRoomResponse>(_roomNew);
         }
@@ -67,7 +69,6 @@ namespace TiketsTerminal.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<bool> Delete(int id)
         {
-
             await _roomService.Delete(id);
             return true;
         }

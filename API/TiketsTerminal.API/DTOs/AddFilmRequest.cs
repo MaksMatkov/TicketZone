@@ -9,15 +9,15 @@ namespace TiketsTerminal.API.DTOs
     public class AddFilmRequest
     {
         [Required]
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
 
         [Required]
         [Url]
-        public string TrailerUrl { get; set; }
+        public string trailerUrl { get; set; }
 
         [Required]
         [Url]
-        public string PosterUrl { get; set; }
+        public string posterUrl { get; set; }
     }
 }

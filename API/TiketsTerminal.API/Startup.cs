@@ -124,7 +124,7 @@ namespace TiketsTerminal.API
             //add di
             services.AddSingleton(connectionStrings);
 
-            //serv
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IFilmService, FilmService>();

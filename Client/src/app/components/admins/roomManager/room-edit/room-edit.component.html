@@ -1,0 +1,23 @@
+<div class="edit-body">
+    <form class="card" [formGroup]="roomForm" (ngSubmit)="submit()">
+
+        <div class="text-value">
+            <mat-form-field appearance="outline">
+                <mat-label>Room Number</mat-label>
+                <input matInput [formControl]="numberForm" type="number" required>
+                <mat-error *ngIf="numberForm.invalid">Invalid value</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Seats Count</mat-label>
+                <input matInput [formControl]="countForm" type="number" required>
+                <mat-error *ngIf="countForm.invalid">Invalid value</mat-error>
+            </mat-form-field>
+
+        </div>
+        <div>
+            <button mat-stroked-button routerLink="/admin/rooms">cancel</button>
+            <button mat-stroked-button type="submit">save</button>
+        </div>
+    </form>
+</div>

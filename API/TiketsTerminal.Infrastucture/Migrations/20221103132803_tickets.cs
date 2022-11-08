@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TiketsTerminal.Infrastucture.Migrations
 {
-    public partial class LastCh : Migration
+    public partial class tickets : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,12 +15,12 @@ namespace TiketsTerminal.Infrastucture.Migrations
                 schema: "fbd",
                 columns: table => new
                 {
-                    PK_Film = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Trailer_Url = table.Column<string>(type: "TEXT", nullable: false),
-                    Poster_Url = table.Column<string>(type: "TEXT", nullable: false)
+                    PK_Film = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Trailer_Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Poster_Url = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,10 +32,10 @@ namespace TiketsTerminal.Infrastucture.Migrations
                 schema: "fbd",
                 columns: table => new
                 {
-                    PK_Film = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Number = table.Column<int>(type: "INTEGER", nullable: false),
-                    Seats_Count = table.Column<int>(type: "INTEGER", nullable: false)
+                    PK_Film = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Number = table.Column<int>(type: "int", nullable: false),
+                    Seats_Count = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,13 +47,14 @@ namespace TiketsTerminal.Infrastucture.Migrations
                 schema: "fbd",
                 columns: table => new
                 {
-                    PK_User = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Email = table.Column<string>(type: "TEXT", nullable: false),
-                    Password = table.Column<string>(type: "TEXT", nullable: false),
-                    IsApproved = table.Column<bool>(type: "INTEGER", nullable: false),
-                    FK_Role = table.Column<int>(type: "INTEGER", nullable: false)
+                    PK_User = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsApproved = table.Column<bool>(type: "bit", nullable: false),
+                    Last_Visited = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FK_Role = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,11 +66,11 @@ namespace TiketsTerminal.Infrastucture.Migrations
                 schema: "fbd",
                 columns: table => new
                 {
-                    PK_Film_Viewing_Time = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FK_Film = table.Column<int>(type: "INTEGER", nullable: false),
-                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    FK_Room = table.Column<int>(type: "INTEGER", nullable: false)
+                    PK_Film_Viewing_Time = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FK_Film = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FK_Room = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,12 +96,12 @@ namespace TiketsTerminal.Infrastucture.Migrations
                 schema: "fbd",
                 columns: table => new
                 {
-                    PK_Ticket_Order = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FK_User = table.Column<int>(type: "INTEGER", nullable: false),
-                    FK_Film_Viewing_Time = table.Column<int>(type: "INTEGER", nullable: false),
-                    Creation_Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Status = table.Column<int>(type: "INTEGER", nullable: false)
+                    PK_Ticket_Order = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FK_User = table.Column<int>(type: "int", nullable: false),
+                    FK_Film_Viewing_Time = table.Column<int>(type: "int", nullable: false),
+                    Creation_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

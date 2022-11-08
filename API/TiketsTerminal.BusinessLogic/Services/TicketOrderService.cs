@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TiketsTerminal.BusinessLogic.Abstraction;
+using TiketsTerminal.BusinessLogic.CustomeExceptions;
 using TiketsTerminal.Domain.Enums;
 using TiketsTerminal.Domain.Models;
 using TiketsTerminal.Infrastucture.Infrastructure;
@@ -15,14 +16,14 @@ namespace TiketsTerminal.BusinessLogic.Services
     {
         public TicketOrderService(dbContext db) : base(db) { }
 
-        public async Task<List<TicketOrder>> GetUserOrdersAsync(int UserId)
+        public async Task<List<TicketOrder>> GetTicketsOrdersByUserAsync(int UserId)
         {
             var user = await _db.User
                 .Include(el => el.TicketOrders)
                 .FirstOrDefaultAsync(x => x.ID == UserId);
 
             if(user == null)
-                throw new Exception("User not found!");
+                throw new NotFoundDataException("User not found!");
 
             return user.TicketOrders.ToList();
         }
@@ -31,10 +32,10 @@ namespace TiketsTerminal.BusinessLogic.Services
         {
             var order = await GetByKeysAsync(id);
             if(order == null)
-                throw new Exception("Order not found!");
+                throw new NotFoundDataException("Order not found!");
 
             order.Status = status;
-            await SaveAsync(order);
+
             await _db.SaveChangesAsync();
 
             return order;
@@ -43,24 +44,40 @@ namespace TiketsTerminal.BusinessLogic.Services
         public override async Task<TicketOrder> SaveAsync(TicketOrder item)
         {
             if (item == null)
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("Invalid data.");
 
             var user = await _db.User.FindAsync(item.FK_User);
             if (user == null)
-                throw new Exception("User not found!");
+                throw new NotFoundDataException("User not found!");
+
             var viewingTime = await _db.FilmViewingTime
                 .Include(el => el.TicketOrders)
                 .Include(el => el.Room)
                 .FirstOrDefaultAsync(el => el.ID == item.FK_Film_Viewing_Time);
             if (viewingTime == null)
-                throw new Exception("Film viewing time not found!");
-            if(viewingTime.TicketOrders.Where(el => el.Status != Status.Rejected).Count() == viewingTime.Room.SeatsCount)
-                throw new Exception("Free seats ended!");
+                throw new NotFoundDataException("Film viewing time not found!");
+
+            if(viewingTime.Room == null)
+                throw new NotFoundDataException("Room not found!");
+
+            if (viewingTime.TicketOrders.Where(el => el.Status != Status.Rejected).Count() == viewingTime.Room.SeatsCount)
+                throw new NotFoundDataException("Free seats ended!");
 
             await base.SaveAsync(item);
             return item;
         }
 
+        public async Task<List<TicketOrder>> GetTicketsOrdersByRoomAsync(int RoomID)
+        {
+            return await _db.FilmViewingTime
+                .Include(el => el.TicketOrders)
+                .Where(el => el.FK_Room == RoomID)
+                .SelectMany(el => el.TicketOrders).ToListAsync();
+        }
 
+        public async Task<List<TicketOrder>> GetTicketsOrdersByFilmViewingTimeAsync(int FilmViewingTimeId)
+        {
+            return await _db.TicketOrder.Where(el => el.FK_Film_Viewing_Time == FilmViewingTimeId).ToListAsync();
+        }
     }
 }

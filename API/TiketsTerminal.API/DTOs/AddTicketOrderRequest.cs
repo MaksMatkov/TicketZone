@@ -10,6 +10,6 @@ namespace TiketsTerminal.API.DTOs
     {
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a value bigger than {1}")]
-        public int FilmViewingTimeId { get; set; }
+        public int filmViewingTimeId { get; set; }
     }
 }

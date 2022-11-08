@@ -9,8 +9,7 @@ namespace TiketsTerminal.BusinessLogic.Abstraction
 {
     public interface IFilmViewingTimeService : IBaseServise<FilmViewingTime>
     {
-        public Task<List<TicketOrder>> GetTicketOrdersAsync(int FilmViewingTimeId);
         public Task<List<FilmViewingTime>> GetByFilmAsync(int FilmId);
-        public Task<FilmViewingTime> GetDeepDataAsync(int FilmViewingTimeId);
+        public Task<FilmViewingTime> GetDeepDataAsync(params object[] keyValues);
     }
 }

@@ -8,11 +8,22 @@ import { ViewingTimeService } from './../../../../common/services/ViewingTimeSer
 import { RoomService } from './../../../../common/services/roomService/room.service';
 import { Room } from 'src/app/common/models/room/Room';
 import { AddViewingTime } from './../../../../common/models/viewingTimes/AddViewingTime';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ActivatedRoute } from '@angular/router';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-views-times-view',
   templateUrl: './views-times-view.component.html',
-  styleUrls: ['./views-times-view.component.scss']
+  styleUrls: ['./views-times-view.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class ViewsTimesViewComponent implements OnInit {
 
@@ -24,6 +35,11 @@ export class ViewsTimesViewComponent implements OnInit {
   roomSelectedValue = 0;
   minDate = Date.now();
 
+  dataSource! : MatTableDataSource<ViewingTimeLite>;
+  displayedColumns = ['select', 'date', 'roomNumber', 'ordersCount', 'seatsCount'];
+  expandedElement!: ViewingTimeLite | null;
+  selection = new SelectionModel<ViewingTimeLite>(true, []);
+
   public vtForm: FormGroup = new FormGroup({
     date: new FormControl('', [Validators.required]),
     room: new FormControl('', Validators.required)
@@ -33,28 +49,33 @@ export class ViewsTimesViewComponent implements OnInit {
 
   get roomControl() { return this.vtForm.controls['room'] as FormControl; }
 
-  constructor(public _fs : FilmService, public _vts : ViewingTimeService, public _rs : RoomService) { }
+  constructor(public _fs : FilmService, public _vts : ViewingTimeService, public _rs : RoomService, public route: ActivatedRoute) { }
 
   reload(){
-    this.vTimes = this._fs.GetViewingTimes(this.filmId);
+    this._fs.GetViewingTimes(this.filmId).subscribe(data => {
+      
+      this.dataSource = new MatTableDataSource<ViewingTimeLite>(data);
+      this.isOpenEditBlock =false;
+      this.selection.clear();
+    });
   }
 
   submit(){
 
     if(!this.vtForm.valid)
-    return;
+      return;
     let addVt = new AddViewingTime();
     if(this.cVTime && this.cVTime.id > 0){
-      addVt.Date = this.dateControl.value as Date;
-      addVt.FK_Room = this.roomControl.value;
-      addVt.FK_Film = this.filmId;
-      this._vts.Put(addVt, this.cVTime.id).subscribe(res => {alert("Done"); this.reload();}, err => alert(err.message));
+      addVt.date = this.dateControl.value as Date;
+      addVt.roomId = this.roomControl.value;
+      addVt.filmId = this.filmId;
+      this._vts.Put(addVt, this.cVTime.id).subscribe(res => {alert("Done"); this.reload();});
     }
     else{
-      addVt.Date = this.dateControl.value as Date;
-      addVt.FK_Room = this.roomControl.value;
-      addVt.FK_Film = this.filmId;
-      this._vts.Save(addVt).subscribe(res => {alert("Done"); this.reload();}, err => alert(err.message));
+      addVt.date = this.dateControl.value as Date;
+      addVt.roomId = this.roomControl.value;
+      addVt.filmId = this.filmId;
+      this._vts.Save(addVt).subscribe(res => {alert("Done"); this.reload();});
     }
   }
 
@@ -72,7 +93,7 @@ export class ViewsTimesViewComponent implements OnInit {
         this.isOpenEditBlock = true;
 
 
-      }, err => alert(err.message))
+      }, err => alert(err.errorMessage))
     }
     else{
       this.dateControl.reset("");
@@ -84,14 +105,38 @@ export class ViewsTimesViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.vTimes = this._fs.GetViewingTimes(this.filmId);
+    this.route.params.subscribe(params => {
+      this.filmId = params['id'];
+      if(this.filmId){
+        this.reload();
+      }
+    });
+  }
+
+  viewOrders(id : number | any){
+    if(id){
+
+    }
   }
 
   onDeleteClick(id : number){
     if(confirm("Are you sure?")){
       this.isOpenEditBlock = false;
-      this._vts.Delete(id).subscribe((data) => {this.reload()}, err => alert("Something went wrong!"))
+      this._vts.Delete(id).subscribe((data) => {this.reload()})
     }
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
 }

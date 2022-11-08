@@ -11,6 +11,8 @@ namespace TiketsTerminal.BusinessLogic.Abstraction
     public interface ITicketOrderService : IBaseServise<TicketOrder>
     {
         public Task<TicketOrder> SetStatusAsync(int id, Status status);
-        public Task<List<TicketOrder>> GetUserOrdersAsync(int UserId);
+        public Task<List<TicketOrder>> GetTicketsOrdersByUserAsync(int UserId);
+        public Task<List<TicketOrder>> GetTicketsOrdersByRoomAsync(int RoomID);
+        public Task<List<TicketOrder>> GetTicketsOrdersByFilmViewingTimeAsync(int FilmViewingTimeId);
     }
 }

@@ -1,17 +1,18 @@
 <div class="login-form">
    
+    <div class="login-form-block">
         <form class="card" [formGroup]="loginForm" (ngSubmit)="onLogin()">
-            <mat-form-field appearance="fill" [style]="isReg ? '' : 'display:none;'">
+            <mat-form-field appearance="outline" [style]="isReg ? '' : 'display:none;'">
                 <mat-label>Name</mat-label>
                 <input matInput placeholder="Your Name" [formControl]="nameForm"  [required]="isReg">
                 <mat-error *ngIf="nameForm.invalid">{{getErrorMessage("password")}}</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>Enter your email</mat-label>
                 <input matInput placeholder="pat@example.com" [formControl]="emailForm"  required>
                 <mat-error *ngIf="emailForm.invalid">{{getErrorMessage("password")}}</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
                 <input matInput [type]="hide ? 'password' : 'text'" [formControl]="passwordForm" required>
                 <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
@@ -21,11 +22,12 @@
             </mat-form-field>
 
             <div class="log-btns">
-                <button mat-stroked-button *ngIf="isReg" type="button" (click)="isReg = false" >Back</button>
-                <button mat-stroked-button *ngIf="!isReg" type="button" (click)="isReg = true" >New Account</button>
+                <button mat-button *ngIf="isReg" type="button" (click)="isReg = false" >Back</button>
+                <button mat-button *ngIf="!isReg" type="button" (click)="isReg = true" >New Account</button>
 
-                <button mat-raised-button color="primary" type="submit" *ngIf="!isReg">Log In</button>
-                <button mat-raised-button color="primary" type="submit" *ngIf="isReg">Register</button>
+                <button mat-raised-button type="submit" *ngIf="!isReg">Log In</button>
+                <button mat-raised-button  type="submit" *ngIf="isReg">Register</button>
             </div>
         </form>
+    </div>
 </div>

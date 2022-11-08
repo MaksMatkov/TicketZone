@@ -11,16 +11,16 @@ namespace TiketsTerminal.API.DTOs
     {
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
+        public string name { get; set; }
 
         [Required]
         [StringLength(50)]
         [EmailAddress]
-        public string Email { get; set; }
+        public string email { get; set; }
 
         [Required]
         [StringLength(16, ErrorMessage = "Password lenght must be more 8 and less then 16 chars!", MinimumLength = 8)]
-        public string Password { get; set; }
+        public string password { get; set; }
 
     }
 }

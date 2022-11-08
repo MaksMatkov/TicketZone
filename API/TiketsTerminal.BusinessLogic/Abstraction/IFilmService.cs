@@ -9,6 +9,7 @@ namespace TiketsTerminal.BusinessLogic.Abstraction
 {
     public interface IFilmService : IBaseServise<Film>
     {
-        public Task<Film> GetDeepByKeysAsync(int id);
+        public Task<Film> GetDeepByKeysAsync(params object[] keyValues);
+        public Task<bool> HardDelete(int id);
     }
 }

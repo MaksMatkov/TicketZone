@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TiketsTerminal.BusinessLogic.Abstraction;
+using TiketsTerminal.BusinessLogic.CustomeExceptions;
 using TiketsTerminal.Domain.Models;
 using TiketsTerminal.Infrastucture.Infrastructure;
 
@@ -18,7 +19,8 @@ namespace TiketsTerminal.BusinessLogic.Services
         {
             var user = await GetByKeysAsync(id);
             if (user == null)
-                throw new Exception("User not found!");
+                throw new NotFoundDataException("User not found!");
+
             user.IsApproved = true;
 
             await _db.SaveChangesAsync();
@@ -33,7 +35,22 @@ namespace TiketsTerminal.BusinessLogic.Services
 
         public async Task<User> GetForAuthenticateAsync(string email, string password)
         {
-            return await _db.User.FirstOrDefaultAsync(el => el.Email == email && el.Password == password && el.IsApproved);
+            return await _db.User.FirstOrDefaultAsync(el => el.Email == email && el.Password == password);
+        }
+
+        public override async Task<User> UpdateAsync(User item, params object[] keyValues)
+        {
+            if(item == null)
+                throw new ArgumentNullException("Invalid data.");
+
+            var user = await GetByKeysAsync(keyValues);
+            if (user == null)
+                throw new NotFoundDataException("User not found!");
+
+            if(_db.User.FirstOrDefaultAsync(el => el.Email == item.Email && !keyValues.Contains(el.ID)) != null)
+                throw new NotUniqueException("Email is not unique!");
+
+            return await base.UpdateAsync(item, item.ID);
         }
     }
 }

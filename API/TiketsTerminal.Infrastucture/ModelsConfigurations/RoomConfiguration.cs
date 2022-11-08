@@ -21,6 +21,7 @@ namespace TiketsTerminal.Infrastucture.ModelsConfigurations
 
             builder.Property(p => p.ID)
                 .HasColumnName("PK_Film")
+                .UseIdentityColumn(1, 1)
                 .ValueGeneratedOnAdd();
             builder.Property(p => p.Number)
                 .HasColumnName("Number");

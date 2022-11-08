@@ -54,16 +54,9 @@ namespace TiketsTerminal.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<AddFilmViewingTimeResponse> Update(int id, AddFilmViewingTimeRequest item)
         {
-            
-
-            var _item = await _filmViewingTimeService.GetByKeysAsync(id);
-            if (_item == null)
-                throw new Exception("Film viewing time not found!");
-
             var _itemNew = _mapper.Map<AddFilmViewingTimeRequest, FilmViewingTime>(item);
-            _itemNew.ID = _item.ID;
 
-            await _filmViewingTimeService.SaveAsync(_itemNew);
+            await _filmViewingTimeService.UpdateAsync(_itemNew, id);
 
             return _mapper.Map<FilmViewingTime, AddFilmViewingTimeResponse>(_itemNew);
         }

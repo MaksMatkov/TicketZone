@@ -64,7 +64,6 @@ export class FilmEditComponent implements OnInit {
   }
 
   submit(){
-    console.log("here")
     let inputModel = new AddFilm();
     inputModel.name = this.nameForm.value;
     inputModel.description = this.descriptionForm.value;
@@ -72,15 +71,15 @@ export class FilmEditComponent implements OnInit {
     inputModel.trailerUrl = this.trailerForm.value;
 
     if(this.film && this.film.id > 0){
-      this._fs.Put(inputModel, this.film.id).subscribe(data => {
+      this._fs.Put(inputModel, this.film.id)
+      .subscribe(data => {
         this.router.navigate(['/admin']);
-      }, err => alert("Something went wrong!"))
+      })
     }
     else {
       console.log("start saving")
       this._fs.Save(inputModel)
-      .subscribe(data => this.router.navigate(['/admin']), 
-      err => {alert("Something went wrong!"); console.log(err)});
+      .subscribe(data => this.router.navigate(['/admin']));
     }
   }
 }

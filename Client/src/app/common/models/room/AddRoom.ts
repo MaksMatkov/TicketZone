@@ -1,4 +1,4 @@
 export class AddRoom {
-    public Number! : number;
-    public SeatsCount! : number;
+    public number! : number;
+    public seatsCount! : number;
 }

@@ -9,5 +9,6 @@ namespace TiketsTerminal.Infrastucture.Infrastructure
     public class ConnectionStringsConfiguration
     {
         public string Main { get; set; }
+        public string Course { get; set; }
     }
 }

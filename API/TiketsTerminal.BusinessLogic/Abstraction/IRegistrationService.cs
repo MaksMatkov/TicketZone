@@ -11,6 +11,6 @@ namespace TiketsTerminal.BusinessLogic.Abstraction
     {
         public Task<User> RegisterNewUserAsync(User user);
         public Task<User> RegisterNewAdminAsync(User user);
-        public void ValidateData(User user);
+        public Task<bool> ValidateData(User user);
     }
 }

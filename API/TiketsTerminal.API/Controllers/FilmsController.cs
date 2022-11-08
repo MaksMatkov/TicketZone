@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TiketsTerminal.API.DTOs;
 using TiketsTerminal.BusinessLogic.Abstraction;
+using TiketsTerminal.BusinessLogic.CustomeExceptions;
 using TiketsTerminal.Domain.Models;
 
 namespace TiketsTerminal.API.Controllers
@@ -33,10 +34,11 @@ namespace TiketsTerminal.API.Controllers
 
             film = await _filmService.GetDeepByKeysAsync(id);
             if (film == null)
-                throw new Exception("Film not found!");
+                throw new NotFoundDataException($"Film not found.");
+
             result = _mapper.Map<Film, GetFilmResponse>(film);
 
-            result.ViewingTimes = _mapper.Map<List<FilmViewingTime>, List<GetFilmViewingTimeLiteResponse>>(film.FilmViewingTimes.ToList());
+            result.viewingTimes = _mapper.Map<List<FilmViewingTime>, List<GetFilmViewingTimeLiteResponse>>(film.FilmViewingTimes.ToList());
 
             return result;
         }
@@ -50,11 +52,11 @@ namespace TiketsTerminal.API.Controllers
         }
 
         [HttpGet("{id}/viewingTimes")]
-        public async Task<List<GetFilmViewingTimeLiteResponse>> GetViewingTimes(int id)
+        public async Task<List<GetFilmViewingTimeResponse>> GetViewingTimes(int id)
         {
             var list = await _filmViewingTimeService.GetByFilmAsync(id);
 
-            return _mapper.Map<List<FilmViewingTime>, List<GetFilmViewingTimeLiteResponse>>(list.ToList());
+            return _mapper.Map<List<FilmViewingTime>, List<GetFilmViewingTimeResponse>>(list.ToList());
         }
 
         [HttpPost]
@@ -71,16 +73,13 @@ namespace TiketsTerminal.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<AddFilmResponse> Update(int id, AddFilmRequest item)
         {
-            var _item = await _filmService.GetByKeysAsync(id);
-            if (_item == null)
-                throw new Exception("Film not found!");
-
+           
             var _itemNew = _mapper.Map<AddFilmRequest, Film>(item);
-            _itemNew.ID = _item.ID;
+            //_itemNew.ID = _item.ID;
 
-            await _filmService.SaveAsync(_itemNew);
+            var result = await _filmService.UpdateAsync(_itemNew, id);
 
-            return _mapper.Map<Film, AddFilmResponse>(_itemNew);
+            return _mapper.Map<Film, AddFilmResponse>(result);
         }
 
         [HttpDelete("{id}")]
@@ -88,6 +87,14 @@ namespace TiketsTerminal.API.Controllers
         public async Task<bool> Delete(int id)
         {
             await _filmService.Delete(id);
+            return true;
+        }
+
+        [HttpDelete("hardDelete/{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<bool> HardDelete(int id)
+        {
+            await _filmService.HardDelete(id);
             return true;
         }
 

@@ -9,10 +9,10 @@ namespace TiketsTerminal.API.DTOs
     public class AddFilmViewingTimeRequest
     {
         [Required]
-        public int FK_Film { get; set; }
+        public int filmId { get; set; }
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime date { get; set; }
         [Required]
-        public int FK_Room { get; set; }
+        public int roomId { get; set; }
     }
 }

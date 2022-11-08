@@ -26,6 +26,6 @@ export class OrdersViewComponent implements OnInit {
   }
 
   setStatus(id : number, status : Status){
-    this._os.SetStatus(id, status).subscribe(res => {alert("Done!"); this.load();}, err => alert(err.message))
+    this._os.SetStatus(id, status).subscribe(res => {alert("Done!"); this.load();},)
   }
 }

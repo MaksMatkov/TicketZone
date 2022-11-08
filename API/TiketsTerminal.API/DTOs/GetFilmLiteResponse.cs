@@ -7,8 +7,8 @@ namespace TiketsTerminal.API.DTOs
 {
     public class GetFilmLiteResponse
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string PosterUrl { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string posterUrl { get; set; }
     }
 }

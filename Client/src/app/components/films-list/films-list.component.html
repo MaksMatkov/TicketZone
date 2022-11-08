@@ -1,25 +1,18 @@
 <div>
-    <div class="search-bar">
-        <mat-form-field class="search-field" appearance="fill">
-            <mat-label>Search film...</mat-label>
-            <input matInput type="text" [(ngModel)]="searchInput">
-            <button *ngIf="searchInput" matSuffix mat-icon-button aria-label="Clear" (click)="searchInput=''">
-              <mat-icon>close</mat-icon>
-            </button>
-          </mat-form-field>
-    </div>
     <div class="films-grid">
         <mat-grid-list [cols]="cols" rowHeight="1:1.4">
             <mat-grid-tile *ngFor="let film of filmList | async">
-                <mat-card  class="film-cart" (click)="view(film.id)"  >
-                    <img mat-card-image [src]="film.posterUrl" alt="">
-                    
-
-                    <mat-card-header class="cart-header">
-                        <mat-card-title class="film-name">{{film.name}}</mat-card-title>
-                        
-                    </mat-card-header>
-                </mat-card>
+                <div class="card" (click)="view(film.id)">
+                    <div class="card-container">
+                        <div class="card-img">
+                            <img src="{{film.posterUrl}}">
+                        </div>
+                    </div>
+                    <div class="card-name">
+                        <div>{{film.name}}</div> 
+                        <mat-icon>play_circle_outline</mat-icon>
+                    </div>
+                </div>
             </mat-grid-tile>
         </mat-grid-list>
     </div>

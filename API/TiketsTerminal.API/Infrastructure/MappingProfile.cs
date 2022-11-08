@@ -14,108 +14,108 @@ namespace TiketsTerminal.API.Infrastructure
         public MappingProfile()
         {
             CreateMap<User, AddUserResponse>()
-                .ForMember("Id", el => el.MapFrom(v => v.ID))
-                .ForMember("Name", el => el.MapFrom(v => v.Name)).ReverseMap();
+                .ForMember("id", el => el.MapFrom(v => v.ID))
+                .ForMember("name", el => el.MapFrom(v => v.Name)).ReverseMap();
 
             CreateMap<AddUserRequest, User>()
-                .ForMember("Name", el => el.MapFrom(v => v.Name))
-                .ForMember("Password", el => el.MapFrom(v => v.Password))
-                .ForMember("Email", el => el.MapFrom(v => v.Email)).ReverseMap();
+                .ForMember("Name", el => el.MapFrom(v => v.name))
+                .ForMember("Password", el => el.MapFrom(v => v.password))
+                .ForMember("Email", el => el.MapFrom(v => v.email)).ReverseMap();
 
             CreateMap<User, GetUserResponse>()
-                .ForMember("ID", el => el.MapFrom(v => v.ID))
-                .ForMember("Name", el => el.MapFrom(v => v.Name))
-                .ForMember("IsApproved", el => el.MapFrom(v => v.IsApproved))
-                .ForMember("Email", el => el.MapFrom(v => v.Email)).ReverseMap();
+                .ForMember("id", el => el.MapFrom(v => v.ID))
+                .ForMember("name", el => el.MapFrom(v => v.Name))
+                .ForMember("isApproved", el => el.MapFrom(v => v.IsApproved))
+                .ForMember("email", el => el.MapFrom(v => v.Email)).ReverseMap();
 
             //Film
             CreateMap<Film, GetFilmResponse>()
-                .ForMember("ID", el => el.MapFrom(v => v.ID))
-                .ForMember("Name", el => el.MapFrom(v => v.Name))
-                .ForMember("Description", el => el.MapFrom(v => v.Description))
-                .ForMember("TrailerUrl", el => el.MapFrom(v => v.TrailerUrl))
-                .ForMember("PosterUrl", el => el.MapFrom(v => v.PosterUrl))
+                .ForMember("id", el => el.MapFrom(v => v.ID))
+                .ForMember("name", el => el.MapFrom(v => v.Name))
+                .ForMember("description", el => el.MapFrom(v => v.Description))
+                .ForMember("trailerUrl", el => el.MapFrom(v => v.TrailerUrl))
+                .ForMember("posterUrl", el => el.MapFrom(v => v.PosterUrl))
                 .ReverseMap();
 
             CreateMap<Film, GetFilmLiteResponse>()
-               .ForMember("ID", el => el.MapFrom(v => v.ID))
-               .ForMember("Name", el => el.MapFrom(v => v.Name))
-               .ForMember("PosterUrl", el => el.MapFrom(v => v.PosterUrl))
+               .ForMember("id", el => el.MapFrom(v => v.ID))
+               .ForMember("name", el => el.MapFrom(v => v.Name))
+               .ForMember("posterUrl", el => el.MapFrom(v => v.PosterUrl))
                .ReverseMap();
 
 
             CreateMap<AddFilmRequest, Film>()
-               .ForMember("Name", el => el.MapFrom(v => v.Name))
-               .ForMember("Description", el => el.MapFrom(v => v.Description))
-               .ForMember("TrailerUrl", el => el.MapFrom(v => v.TrailerUrl))
-               .ForMember("PosterUrl", el => el.MapFrom(v => v.PosterUrl))
+               .ForMember("Name", el => el.MapFrom(v => v.name))
+               .ForMember("Description", el => el.MapFrom(v => v.description))
+               .ForMember("TrailerUrl", el => el.MapFrom(v => v.trailerUrl))
+               .ForMember("PosterUrl", el => el.MapFrom(v => v.posterUrl))
                .ReverseMap();
 
             CreateMap<Film, AddFilmResponse>()
-               .ForMember("ID", el => el.MapFrom(v => v.ID))
-               .ForMember("Name", el => el.MapFrom(v => v.Name))
+               .ForMember("id", el => el.MapFrom(v => v.ID))
+               .ForMember("name", el => el.MapFrom(v => v.Name))
                .ReverseMap();
             
 
             //viewing times
             CreateMap<FilmViewingTime, GetFilmViewingTimeLiteResponse>()
-                .ForMember("ID", el => el.MapFrom(v => v.ID))
-                .ForMember("Date", el => el.MapFrom(v => v.Date))
+                .ForMember("id", el => el.MapFrom(v => v.ID))
+                .ForMember("date", el => el.MapFrom(v => v.Date))
                 .ReverseMap();
 
             CreateMap<FilmViewingTime, AddFilmViewingTimeResponse>()
-                .ForMember("ID", el => el.MapFrom(v => v.ID))
-                .ForMember("Date", el => el.MapFrom(v => v.Date))
+                .ForMember("id", el => el.MapFrom(v => v.ID))
+                .ForMember("date", el => el.MapFrom(v => v.Date))
                 .ReverseMap();
 
             CreateMap<AddFilmViewingTimeRequest, FilmViewingTime>()
-                .ForMember("Date", el => el.MapFrom(v => v.Date))
-                .ForMember("FK_Room", el => el.MapFrom(v => v.FK_Room))
-                .ForMember("FK_Film", el => el.MapFrom(v => v.FK_Film))
+                .ForMember("Date", el => el.MapFrom(v => v.date))
+                .ForMember("FK_Room", el => el.MapFrom(v => v.roomId))
+                .ForMember("FK_Film", el => el.MapFrom(v => v.filmId))
                 .ReverseMap();
 
             CreateMap<FilmViewingTime, GetFilmViewingTimeResponse>()
-                .ForMember("ID", el => el.MapFrom(v => v.ID))
-                .ForMember("Date", el => el.MapFrom(v => v.Date))
-                .ForMember("RoomNumber", el => el.MapFrom(v => (v.Room != null) ? v.Room.Number : 0))
-                .ForMember("RoomId", el => el.MapFrom(v => (v.Room != null) ? v.Room.ID : 0))
-                .ForMember("OrdersCount", el => el.MapFrom(v => (v.TicketOrders != null) ? v.TicketOrders.Where(el => el.Status != Status.Rejected).Count() : 0))
-                .ForMember("SeatsCount", el => el.MapFrom(v => (v.Room != null) ? v.Room.SeatsCount : 0))
-                .ForMember("FilmId", el => el.MapFrom(v => v.FK_Film))
+                .ForMember("id", el => el.MapFrom(v => v.ID))
+                .ForMember("date", el => el.MapFrom(v => v.Date))
+                .ForMember("roomNumber", el => el.MapFrom(v => (v.Room != null) ? v.Room.Number : 0))
+                .ForMember("roomId", el => el.MapFrom(v => (v.Room != null) ? v.Room.ID : 0))
+                .ForMember("ordersCount", el => el.MapFrom(v => (v.TicketOrders != null) ? v.TicketOrders.Where(el => el.Status != Status.Rejected).Count() : 0))
+                .ForMember("seatsCount", el => el.MapFrom(v => (v.Room != null) ? v.Room.SeatsCount : 0))
+                .ForMember("filmId", el => el.MapFrom(v => v.FK_Film))
                 .ReverseMap();
 
             //Room
             CreateMap<Room, AddRoomResponse>()
-                .ForMember("ID", el => el.MapFrom(v => v.ID))
-                .ForMember("Number", el => el.MapFrom(v => v.Number)).ReverseMap();
+                .ForMember("id", el => el.MapFrom(v => v.ID))
+                .ForMember("number", el => el.MapFrom(v => v.Number)).ReverseMap();
 
             CreateMap<AddRoomRequest, Room>()
-                .ForMember("Number", el => el.MapFrom(v => v.Number))
-                .ForMember("SeatsCount", el => el.MapFrom(v => v.SeatsCount))
+                .ForMember("Number", el => el.MapFrom(v => v.number))
+                .ForMember("SeatsCount", el => el.MapFrom(v => v.seatsCount))
                 .ReverseMap();
 
             CreateMap<Room, GetRoomResponse>()
-                .ForMember("ID", el => el.MapFrom(v => v.ID))
-                .ForMember("Number", el => el.MapFrom(v => v.Number))
-                .ForMember("SeatsCount", el => el.MapFrom(v => v.SeatsCount))
+                .ForMember("id", el => el.MapFrom(v => v.ID))
+                .ForMember("number", el => el.MapFrom(v => v.Number))
+                .ForMember("seatsCount", el => el.MapFrom(v => v.SeatsCount))
                 .ReverseMap();
 
 
             //ticket order
             CreateMap<AddTicketOrderRequest, TicketOrder>()
-                .ForMember("FK_Film_Viewing_Time", el => el.MapFrom(v => v.FilmViewingTimeId))
+                .ForMember("FK_Film_Viewing_Time", el => el.MapFrom(v => v.filmViewingTimeId))
                 .ReverseMap();
 
             CreateMap<TicketOrder, AddTicketOrderResponse>()
-                .ForMember("ID", el => el.MapFrom(v => v.ID))
+                .ForMember("id", el => el.MapFrom(v => v.ID))
                 .ReverseMap();
 
             CreateMap<TicketOrder, GetTicketOrderResponse>()
                 .ForMember("id", el => el.MapFrom(v => v.ID))
-                .ForMember("UserId", el => el.MapFrom(v => v.FK_User))
-                .ForMember("FilmViewingTimeId", el => el.MapFrom(v => v.FK_Film_Viewing_Time))
-                .ForMember("CreationDate", el => el.MapFrom(v => v.CreationDate))
-                .ForMember("Status", el => el.MapFrom(v => v.Status))
+                .ForMember("userId", el => el.MapFrom(v => v.FK_User))
+                .ForMember("filmViewingTimeId", el => el.MapFrom(v => v.FK_Film_Viewing_Time))
+                .ForMember("creationDate", el => el.MapFrom(v => v.CreationDate))
+                .ForMember("status", el => el.MapFrom(v => v.Status))
                 .ReverseMap();
 
         }

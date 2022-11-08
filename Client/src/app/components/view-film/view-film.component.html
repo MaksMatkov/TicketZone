@@ -6,31 +6,40 @@
         <div class="text-info">
             <div class="film-name"> {{film && film.name}}</div>
             <div class="film-description"> {{film && film.description}}</div>
+            <div>
+                
+            </div>
         </div>
     </div>
     <div class="viewing-times">
-        <div *ngIf="!showMoreInfo">
-            <mat-selection-list *ngIf="film && film.viewingTimes && film.viewingTimes.length > 0" #timesGrid
-                [multiple]="false">
-                <mat-list-option class="row" (click)="selectView(vt.id)" *ngFor="let vt of film.viewingTimes"
-                    [value]="vt.id">
+        <div class="header">
+            <div>Schedule</div> 
+            <div class="header-count">Session count: {{film?.viewingTimes?.length || 0}}</div> 
+        </div>
+        <div class="calendar-box" *ngIf="!showMoreInfo">
+            <div *ngIf="film && film.viewingTimes && film.viewingTimes.length > 0" #timesGrid>
+                <div class="calendar-card table-container" (click)="selectView(vt.id)" *ngFor="let vt of film.viewingTimes">
                     <div class="row">
-                        {{vt.date | date}}
+                        {{vt.date | date : 'fullDate'}}
                     </div>
-                </mat-list-option>
-            </mat-selection-list>
+                </div>
+            </div>
 
-            <div *ngIf="isNotHaveAnyShow">
+            <div class="not-have" *ngIf="isNotHaveAnyShow">
                 <h1>Not Have Any Sessions</h1>
             </div>
         </div>
         <div *ngIf="showMoreInfo" class="view-info">
-            <div>Time: {{selectedView.date | date}}</div>
-            <div>Room: {{ selectedView.roomNumber }}</div>
-            <div>Free Seats Count: {{ selectedView.seatsCount - selectedView.ordersCount }}</div>
-            <div class="view-info-control">
-                <button mat-raised-button (click)="backClick()">Back</button>
-                <button mat-raised-button (click)="madeOrder()" [disabled]="disabledOrderBtn" color="accent">Order ticket</button>
+            <div class="view-info-body">
+                <div>
+                    <div class="seats-count">Date: {{selectedView.date | date}}</div>
+                    <div class="seats-count">Room: {{ selectedView.roomNumber }}</div>
+                    <div class="seats-count"><mat-icon>airline_seat_recline_extra</mat-icon>{{ selectedView.seatsCount - selectedView.ordersCount }}</div>
+                </div>
+                <div>
+                    <button style="width:100%" mat-raised-button color="warn" (click)="backClick()"><mat-icon>close</mat-icon> Cancel</button>
+                    <button mat-raised-button (click)="madeOrder()" [disabled]="disabledOrderBtn" color="accent">Order ticket</button>
+                </div>
             </div>
         </div>
     </div>

@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FilmsListComponent } from './components/films-list/films-list.component';
 
@@ -18,10 +17,10 @@ import { tokenData } from './common/models/tokenData';
 import { environment } from 'src/environments/environment';
 
 import {MatListModule} from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import {MatTabsModule} from '@angular/material/tabs';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AdminMenuComponent } from './components/admins/admin-menu/admin-menu.component';
 import { LoginComponent } from './components/login-components/login/login.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
@@ -34,12 +33,19 @@ import { UsersListComponent } from './components/admins/userManager/users-view/u
 import { ViewFilmComponent } from './components/view-film/view-film.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { LoadingInterceptor } from './common/interceptors/loading';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { RoomListComponent } from './components/admins/roomManager/room-list/room-list.component';
 import {MatSelectModule} from '@angular/material/select';
 import { OrdersComponent } from './components/orders/orders.component';
+import { AdminControlComponent } from './components/admins/admin-control/admin-control.component';
+import { RoomEditComponent } from './components/admins/roomManager/room-edit/room-edit.component';
+import { HttpMainInterceptor } from './common/interceptors/http.interceptor';
+import { CommonModule } from '@angular/common';
+import { AlertComponent } from './common/dialogs/alert/alert.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 
 export function tokenGetter() {
@@ -66,10 +72,8 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
     HeaderComponent,
     FilmsListComponent,
-    AdminMenuComponent,
     LoginComponent,
     FilmViewComponent,
     OrdersViewComponent,
@@ -78,7 +82,10 @@ export function tokenGetter() {
     UsersListComponent,
     ViewFilmComponent,
     RoomListComponent,
-    OrdersComponent
+    OrdersComponent,
+    AdminControlComponent,
+    RoomEditComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -96,6 +103,10 @@ export function tokenGetter() {
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatDialogModule,
+    CommonModule,
+    MatTableModule,
+    MatCheckboxModule,
 
     MatTabsModule,
     MatInputModule,
@@ -111,9 +122,11 @@ export function tokenGetter() {
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
-    useClass: LoadingInterceptor,
+    useClass: HttpMainInterceptor,
     multi: true,
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ]
 })
 export class AppModule { }

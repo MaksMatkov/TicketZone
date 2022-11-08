@@ -9,9 +9,9 @@ namespace TiketsTerminal.API.DTOs
     public class GetTicketOrderResponse
     {
         public int id { get; set; }
-        public int UserId { get; set; }
-        public int FilmViewingTimeId { get; set; }
-        public DateTime CreationDate { get; set; }
-        public Status Status { get; set; }
+        public int userId { get; set; }
+        public int filmViewingTimeId { get; set; }
+        public DateTime creationDate { get; set; }
+        public Status status { get; set; }
     }
 }

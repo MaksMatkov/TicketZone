@@ -8,7 +8,7 @@ import { TicketOrderService } from './../../common/services/ticketOrderService/t
 import { AddTicketOrder } from './../../common/models/order/AddTicketOrder';
 import { AuthService } from 'src/app/common/services/authService/auth.service';
 import { Role } from 'src/app/common/enums/Role';
-import { SelectorMatcher } from '@angular/compiler';
+
 
 @Component({
   selector: 'app-view-film',
@@ -16,7 +16,7 @@ import { SelectorMatcher } from '@angular/compiler';
   styleUrls: ['./view-film.component.scss']
 })
 export class ViewFilmComponent implements OnInit {
-
+  
   filmId = 0
   film! : Film;
   dateTime!: Date | null;
@@ -27,6 +27,7 @@ export class ViewFilmComponent implements OnInit {
   constructor(public route: ActivatedRoute, public _fs :FilmService, public _vts :ViewingTimeService, public _os : TicketOrderService, private router: Router,public _as: AuthService) { }
 
   ngOnInit(): void {
+     
     this.route.params.subscribe(params => {
       this.filmId = params['id'];
       if(this.filmId){
@@ -49,7 +50,7 @@ export class ViewFilmComponent implements OnInit {
 
   selectView(id : number){
     if(id > 0){
-      this._vts.GetById(id).subscribe(data => {this.selectedView = data; this.showMoreInfo = true;}, err => alert(err.message));
+      this._vts.GetById(id).subscribe(data => {this.selectedView = data; this.showMoreInfo = true;});
     }
   }
 
@@ -63,7 +64,7 @@ export class ViewFilmComponent implements OnInit {
       if(confirm("Are you sure?")){
         var order = new AddTicketOrder();
         order.FilmViewingTimeId = this.selectedView.id;
-        this._os.Save(order).subscribe(data =>  {alert("Done!"); this.selectView(this.selectedView.id)}, err => alert(err.message))
+        this._os.Save(order).subscribe(data => {alert("Done!"); this.selectView(this.selectedView.id)})
       }
     }
     else{
