@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Status } from '../enums/Status';
 
 @Pipe({
-  name: 'orderStatus',
+  name: 'orderStatusColor',
   pure: false
 })
 export class OrderStatusPipe implements PipeTransform {
@@ -10,15 +10,15 @@ export class OrderStatusPipe implements PipeTransform {
   transform(value: Status, ...args: unknown[]): string {
     switch (value) {
       case Status.Approved:
-        return 'Approved';
+        return 'background-color:green;';
       case Status.Rejected:
-        return 'Rejected';
+        return 'background-color:red;';
       case Status.NeedApprove:
-        return 'Need Approve';
+        return 'background-color:rgb(0, 8, 255);';
       case Status.NeedReject:
-        return 'Need Reject';
+        return 'background-color:rgb(109, 26, 134);';
       case Status.RejectedDeclined:
-        return 'Rejected Declined';
+        return 'background-color:rgb(0, 0, 0);';
       default:
         return '';
     }

@@ -39,8 +39,8 @@ export class HeaderComponent implements OnInit {
     this._as.LogOut();
   }
 
-  clickMyOrders(){
-    this.router.navigate(['/orders']);
+  clickMyAccount(){
+    this.router.navigate(['/my-account']);
   }
 
   clickLogIn(){

@@ -1,5 +1,15 @@
 .my-orders-b{
-    margin: 50px;
+    padding: 20px;
+    border-radius: 16px;
+    transition: all 0.45s;
+    
+    &:hover{
+        box-shadow: rgba(0, 0, 0, 0.451) 0px 4px 12px;
+    }
+}
+.scroll{
+    max-height: 400px;
+    overflow: auto;
 }
 
 .order-row-controls{
@@ -9,4 +19,9 @@
     div{
         padding-right: 10px;
     }
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
 }

@@ -21,4 +21,11 @@ export class FilmService extends BaseRestService<FilmLite, Film, AddFilm> {
         return <ViewingTimeLite[]>res;
       }));
   }
+
+  public GetAllWithSearch(searchInput = ""): Observable<FilmLite[]> {
+    return this.http.get(this.apiUrl + this.endPoint + "?searchInput=" + searchInput).pipe(
+      map(res => {
+        return <FilmLite[]>res;
+      }));
+  }
 }

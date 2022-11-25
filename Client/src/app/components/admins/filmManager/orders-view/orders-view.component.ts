@@ -1,5 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { Status } from 'src/app/common/enums/Status';
@@ -17,7 +18,9 @@ export class OrdersViewComponent implements OnInit {
   displayedColumns: string[] = [ 'filmName', 'roomNumber', 'userEmail', 'creationDate', 'status'];
   dataSource! : MatTableDataSource<TicketOrder>;
   selection = new SelectionModel<TicketOrder>(true, []);
-  constructor(public _os : TicketOrderService) { }
+  
+  constructor(public _os : TicketOrderService,
+              private _snackBar: MatSnackBar ) { }
 
   get status(){
     return Status;
@@ -34,7 +37,7 @@ export class OrdersViewComponent implements OnInit {
 
   setStatus(id : number | undefined, status : Status){
     if(id)
-      this._os.SetStatus(id, status).subscribe(res => {},)
+      this._os.SetStatus(id, status).subscribe(res => {this._snackBar.open('Status was changed!', 'Ok');},)
   }
 
   isAllSelected() {

@@ -10,4 +10,5 @@ export class AuthDaSettings {
     static roomsEndpoint: string = 'Rooms';
     static viewingTimeEndpoint: string = 'FilmViewingTimes';
     static ticketOrderEndpoint: string = 'TicketOrders';
+    static logEndpoint: string = 'Log';
 }

@@ -40,6 +40,18 @@ namespace TiketsTerminal.API.Controllers
             return _mapper.Map<List<User>, List<GetUserResponse>>(users.ToList());
         }
 
+        [HttpGet("getInfo")]
+        [Authorize]
+        public async Task<GetUserResponse> GetInfo()
+        {
+            var id = IdentityHelper.GetSub(User);
+            if (id == 0)
+                throw new Exception("Something went wrong");
+            var users = await _userService.GetByKeysAsync(id);
+
+            return _mapper.Map<User, GetUserResponse>(users);
+        }
+
         [HttpPost("register")]
         public async Task<AddUserResponse> AddUser(AddUserRequest user)
         {
@@ -100,7 +112,9 @@ namespace TiketsTerminal.API.Controllers
             return _mapper.Map<User, AddUserResponse>(_user);
         }
 
-
+        [HttpGet("notApprovedCount")]
+        [Authorize(Roles = "Admin")]
+        public async Task<int> GetNotApprovedCount() => await _userService.GetNotApprovedUsersCountAsync();
 
     }
 }

@@ -108,6 +108,7 @@ namespace TiketsTerminal.API
         private void SetupDependencyInjection(IServiceCollection services)
         {
             var _ConnectionStringsConfiguration = Configuration.GetSection("ConnectionStrings").Get<ConnectionStringsConfiguration>();
+            var _LogPath = (string)Configuration.GetValue(typeof(string), "logFilePath");
 
             services.AddDbContext<dbContext>(o =>
             {
@@ -123,6 +124,7 @@ namespace TiketsTerminal.API
 
             //add di
             services.AddSingleton(_ConnectionStringsConfiguration);
+            services.AddSingleton(new LogPath() { logFilePath = _LogPath });
 
 
             services.AddScoped<IUserService, UserService>();

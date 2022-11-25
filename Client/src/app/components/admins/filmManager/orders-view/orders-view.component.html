@@ -30,13 +30,16 @@
                 <mat-form-field class="order-status-select" appearance="fill"  >
                     <!-- <mat-label>status</mat-label> -->
                     <mat-select [(value)]="element.status" (valueChange)="setStatus(element.id,element.status)">
-                      <mat-option [value]="status.Approved" style="color:green;">{{status.Approved | orderStatus}}</mat-option>
-                      <mat-option [value]="status.NeedApprove" style="color:rgb(0, 8, 255);">{{status.NeedApprove | orderStatus}}</mat-option>
-                      <mat-option [value]="status.Rejected" style="color:red;">{{status.Rejected | orderStatus}}</mat-option>
-                      <mat-option [value]="status.NeedReject" style="color:rgb(109, 26, 134);">{{status.NeedReject | orderStatus}}</mat-option>
-                      <mat-option [value]="status.RejectedDeclined" style="color:rgb(0, 0, 0);">{{status.RejectedDeclined | orderStatus}}</mat-option>
+                      <mat-option [value]="status.Approved" style="color:green;">Approved</mat-option>
+                      <mat-option [value]="status.NeedApprove" style="color:rgb(0, 8, 255);">Need Approve</mat-option>
+                      <mat-option [value]="status.Rejected" style="color:red;">Rejected</mat-option>
+                      <mat-option [value]="status.NeedReject" style="color:rgb(109, 26, 134);">Need Reject</mat-option>
+                      <mat-option [value]="status.RejectedDeclined" style="color:rgb(0, 0, 0);">Rejected Declined</mat-option>
                     </mat-select>
                 </mat-form-field>
+                <div class="marker" [style]="element.status | orderStatusColor">
+                        
+                </div>
             </td>
         </ng-container>
 

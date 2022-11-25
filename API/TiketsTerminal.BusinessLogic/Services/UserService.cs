@@ -35,7 +35,20 @@ namespace TiketsTerminal.BusinessLogic.Services
 
         public async Task<User> GetForAuthenticateAsync(string email, string password)
         {
+            var user = await _db.User.FirstOrDefaultAsync(el => el.Email == email); 
+            if (user == null)
+                throw new NotFoundDataException("Invalid user data.");
+           
+            if(user.Password != password)
+                throw new NotAllowException("Invalid password or email.");
+
+
             return await _db.User.FirstOrDefaultAsync(el => el.Email == email && el.Password == password);
+        }
+
+        public async Task<int> GetNotApprovedUsersCountAsync()
+        {
+            return await _db.User.Where(el => !el.IsApproved).CountAsync();
         }
 
         public override async Task<User> UpdateAsync(User item, params object[] keyValues)

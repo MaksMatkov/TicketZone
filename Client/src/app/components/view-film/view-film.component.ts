@@ -8,6 +8,7 @@ import { TicketOrderService } from './../../common/services/ticketOrderService/t
 import { AddTicketOrder } from './../../common/models/order/AddTicketOrder';
 import { AuthService } from 'src/app/common/services/authService/auth.service';
 import { Role } from 'src/app/common/enums/Role';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -24,7 +25,13 @@ export class ViewFilmComponent implements OnInit {
   showMoreInfo = false;
   disabledOrderBtn = false;
 
-  constructor(public route: ActivatedRoute, public _fs :FilmService, public _vts :ViewingTimeService, public _os : TicketOrderService, private router: Router,public _as: AuthService) { }
+  constructor(public route: ActivatedRoute, 
+    public _fs :FilmService, 
+    public _vts :ViewingTimeService, 
+    public _os : TicketOrderService, 
+    private router: Router, 
+    public _as: AuthService,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
      
@@ -64,7 +71,10 @@ export class ViewFilmComponent implements OnInit {
       if(confirm("Are you sure?")){
         var order = new AddTicketOrder();
         order.FilmViewingTimeId = this.selectedView.id;
-        this._os.Save(order).subscribe(data => {alert("Done!"); this.selectView(this.selectedView.id)})
+        this._os.Save(order).subscribe(data => {
+          this._snackBar.open('Done!', 'Ok'); 
+          this.selectView(this.selectedView.id)
+        })
       }
     }
     else{

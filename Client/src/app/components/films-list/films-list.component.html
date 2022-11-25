@@ -1,6 +1,15 @@
 <div>
+    <div class="search-input-block">
+        <mat-form-field class="full-width" appearance="outline">
+            <input #searchInput type="text" matInput (input)="saveInput()"
+                   placeholder="Search text..." autocomplete="off">
+                   <button *ngIf="showBtn" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
+                    <mat-icon>close</mat-icon>
+                  </button>
+          </mat-form-field>
+    </div>
     <div class="films-grid">
-        <mat-grid-list [cols]="cols" rowHeight="1:1.4">
+        <mat-grid-list [cols]="cols" rowHeight="1:1.4" *ngIf="(filmList | async)?.length">
             <mat-grid-tile *ngFor="let film of filmList | async">
                 <div class="card" (click)="view(film.id)">
                     <div class="card-container">
@@ -15,6 +24,7 @@
                 </div>
             </mat-grid-tile>
         </mat-grid-list>
+        <div *ngIf="!(filmList | async)?.length" class="empty-res">NO RESULTS</div>
     </div>
 
 </div>

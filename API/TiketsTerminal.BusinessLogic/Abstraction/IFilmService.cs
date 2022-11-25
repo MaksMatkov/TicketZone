@@ -11,5 +11,6 @@ namespace TiketsTerminal.BusinessLogic.Abstraction
     {
         public Task<Film> GetDeepByKeysAsync(params object[] keyValues);
         public Task<bool> HardDelete(int id);
+        public Task<IEnumerable<Film>> GetFilmsWithSearchAsync(string searchInput = "");
     }
 }

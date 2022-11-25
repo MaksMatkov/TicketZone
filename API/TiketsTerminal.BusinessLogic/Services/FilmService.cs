@@ -42,5 +42,13 @@ namespace TiketsTerminal.BusinessLogic.Services
 
             return await Delete(film);
         }
+
+        public async Task<IEnumerable<Film>> GetFilmsWithSearchAsync(string searchInput = "")
+        {
+            if (String.IsNullOrEmpty(searchInput))
+                return await base.GetAsync();
+
+            return await _db.Film.Where(el => el.Name.ToLower().Contains(searchInput.ToLower())).ToListAsync();
+        }
     }
 }

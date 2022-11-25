@@ -15,15 +15,11 @@ import { AlertComponent } from '../dialogs/alert/alert.component';
 @Injectable()
 export class HttpMainInterceptor implements HttpInterceptor {
 
-
-
-
   constructor(private loadServ: LoadingStateService,
     public dialog: MatDialog) {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-
 
     this.loadServ.Show();
     return next.handle(request).pipe(tap(event => event, errorResponse => {
@@ -34,7 +30,6 @@ export class HttpMainInterceptor implements HttpInterceptor {
         })
       }
       else if(errorResponse?.error?.errors){
-       
          this.dialog.open(AlertComponent, {
            data: { text: Object.values(errorResponse?.error?.errors)[0], restoreFocus: false  },
         })
@@ -44,28 +39,11 @@ export class HttpMainInterceptor implements HttpInterceptor {
           data: { text: 'Something went wrong.', restoreFocus: false },
         })
       }
-
-
     }), finalize(() => this.loadServ.Hide()));
   }
 }
 
 
 
-// tap(
-//   event => event,
-//   err => {
-//     return;
-//     if(err?.error?.errorMessage){
-//       this.dialog.open(this.simpleDialog, {
-//         data: { text: err?.error?.errorMessage },
-//       })
-//     }
-//     else{
-//       this.dialog.open(this.simpleDialog, {
-//         data: { text: 'Something went wrong.' },
-//       })
-//     }
-//   }
-// )
+
 

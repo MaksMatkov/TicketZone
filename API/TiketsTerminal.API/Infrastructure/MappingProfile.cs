@@ -26,6 +26,7 @@ namespace TiketsTerminal.API.Infrastructure
                 .ForMember("id", el => el.MapFrom(v => v.ID))
                 .ForMember("name", el => el.MapFrom(v => v.Name))
                 .ForMember("isApproved", el => el.MapFrom(v => v.IsApproved))
+                .ForMember("lastVisited", el => el.MapFrom(v => v.LastVisited))
                 .ForMember("email", el => el.MapFrom(v => v.Email)).ReverseMap();
 
             //Film

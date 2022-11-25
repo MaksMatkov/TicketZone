@@ -1,0 +1,9 @@
+.order-status-cell{
+    display: flex;
+    flex-direction: row;
+
+    .marker{
+        height: 52px;
+        width: 6px;
+    }
+}

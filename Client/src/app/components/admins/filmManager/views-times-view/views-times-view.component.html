@@ -36,7 +36,7 @@
 
   <ng-container matColumnDef="ordersCount">
     <th mat-header-cell *matHeaderCellDef> orders count </th>
-    <td mat-cell *matCellDef="let element"><button *ngIf="element.ordersCount > 0" (click)="viewOrders(selection.selected[0].id)" mat-raised-button color="accent">View [{{element.ordersCount}}]</button> </td>
+    <td mat-cell *matCellDef="let element"><a *ngIf="element.ordersCount > 0" mat-raised-button [routerLink]="['/admin/orders']" color="accent">View [{{element.ordersCount}}]</a> </td>
   </ng-container>
 
   <ng-container matColumnDef="seatsCount">

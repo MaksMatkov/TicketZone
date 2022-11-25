@@ -46,8 +46,10 @@ import { AlertComponent } from './common/dialogs/alert/alert.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { OrderStatusPipe } from './common/pipes/order-status.pipe';
-
-
+import { AccountComponent } from './components/account/account.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatBadgeModule} from '@angular/material/badge';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 export function tokenGetter() {
   let key = 'jwt';
@@ -87,7 +89,9 @@ export function tokenGetter() {
     AdminControlComponent,
     RoomEditComponent,
     AlertComponent,
-    OrderStatusPipe
+    OrderStatusPipe,
+    AccountComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -109,6 +113,8 @@ export function tokenGetter() {
     CommonModule,
     MatTableModule,
     MatCheckboxModule,
+    MatSnackBarModule,
+    MatBadgeModule,
 
     MatTabsModule,
     MatInputModule,

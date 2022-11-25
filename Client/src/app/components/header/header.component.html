@@ -6,7 +6,7 @@
         <div class="controls">
            
             
-            <button mat-button (click)="clickMyOrders()"  *ngIf="_as.currentUserValue && _as.currentUserValue.role == role.User">My Orders</button>
+            <button mat-button (click)="clickMyAccount()"  *ngIf="_as.currentUserValue && _as.currentUserValue.role == role.User">My Account</button>
             <button mat-icon-button (click)="clickSettings()" *ngIf="_as.currentUserValue && _as.currentUserValue.role == role.Admin">
                 <mat-icon>settings</mat-icon>
             </button>

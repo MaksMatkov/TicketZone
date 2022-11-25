@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Role } from 'src/app/common/enums/Role';
 import { tokenData } from 'src/app/common/models/tokenData';
@@ -24,7 +25,10 @@ export class LoginComponent implements OnInit {
   });
   public submitted = false;
 
-  constructor(private _authS: AuthService, private router: Router, private _us : UserService) { }
+  constructor(private _authS: AuthService, 
+              private router: Router, 
+              private _us : UserService, 
+              public _snackBar : MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -38,7 +42,9 @@ export class LoginComponent implements OnInit {
         newUser.password = this.getFormFiledValue("password");
         newUser.email = this.getFormFiledValue("email");
 
-        this._us.Register(newUser).subscribe(res => {alert("Done. Waite for approve"); this.router.navigate(['/']);})
+        this._us.Register(newUser).subscribe(res => {
+          this._snackBar.open('Done. Waite for approve', 'Ok'); 
+          this.router.navigate(['/']);})
         return;
       }
 

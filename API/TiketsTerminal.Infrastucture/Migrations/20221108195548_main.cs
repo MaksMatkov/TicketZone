@@ -160,10 +160,10 @@ namespace TiketsTerminal.Infrastucture.Migrations
                 column: "Email",
                 unique: true);
 
-            //call SQL code from files
-            System.IO.DirectoryInfo d = new System.IO.DirectoryInfo(@"..\TiketsTerminal.Infrastucture\MigrationsSQL"); //Assuming Test is your Folder
+            //call SQL code from files in Migration
+            System.IO.DirectoryInfo d = new System.IO.DirectoryInfo(@"..\TiketsTerminal.Infrastucture\MigrationsSQL"); 
 
-            System.IO.FileInfo[] Files = d.GetFiles("*.sql"); //Getting Text files
+            System.IO.FileInfo[] Files = d.GetFiles("*.sql"); 
             foreach (System.IO.FileInfo file in Files)
             {
                 migrationBuilder.Sql($"{System.IO.File.ReadAllText(file.FullName)}");

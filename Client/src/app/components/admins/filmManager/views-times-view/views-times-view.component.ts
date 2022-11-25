@@ -12,6 +12,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { ActivatedRoute } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-views-times-view',
@@ -49,7 +50,11 @@ export class ViewsTimesViewComponent implements OnInit {
 
   get roomControl() { return this.vtForm.controls['room'] as FormControl; }
 
-  constructor(public _fs : FilmService, public _vts : ViewingTimeService, public _rs : RoomService, public route: ActivatedRoute) { }
+  constructor(public _fs : FilmService, 
+              public _vts : ViewingTimeService, 
+              public _rs : RoomService, 
+              public route : ActivatedRoute,
+              private _snackBar: MatSnackBar ) { }
 
   reload(){
     this._fs.GetViewingTimes(this.filmId).subscribe(data => {
@@ -69,13 +74,13 @@ export class ViewsTimesViewComponent implements OnInit {
       addVt.date = this.dateControl.value as Date;
       addVt.roomId = this.roomControl.value;
       addVt.filmId = this.filmId;
-      this._vts.Put(addVt, this.cVTime.id).subscribe(res => {alert("Done"); this.reload();});
+      this._vts.Put(addVt, this.cVTime.id).subscribe(res => {this._snackBar.open('Done!', 'Ok'); this.reload(); });
     }
     else{
       addVt.date = this.dateControl.value as Date;
       addVt.roomId = this.roomControl.value;
       addVt.filmId = this.filmId;
-      this._vts.Save(addVt).subscribe(res => {alert("Done"); this.reload();});
+      this._vts.Save(addVt).subscribe(res => {this._snackBar.open('Done!', 'Ok'); this.reload(); });
     }
   }
 
@@ -85,20 +90,14 @@ export class ViewsTimesViewComponent implements OnInit {
     if(_vtId > 0){
       this._vts.GetById(_vtId).subscribe(data => {
         this.cVTime = data;
-        console.log(data)
         this.dateControl.reset(data.date);
         this.roomControl.reset(data.roomId);
-      //  this.roomSelectedValue = data.roomNumber;
-
         this.isOpenEditBlock = true;
-
-
-      }, err => alert(err.errorMessage))
+      })
     }
     else{
       this.dateControl.reset("");
       this.roomControl.reset("");
-  //    this.roomSelectedValue = 0;
       this.isOpenEditBlock = true;
       this.cVTime = new ViewingTime();
     }
@@ -113,16 +112,10 @@ export class ViewsTimesViewComponent implements OnInit {
     });
   }
 
-  viewOrders(id : number | any){
-    if(id){
-
-    }
-  }
-
   onDeleteClick(id : number){
     if(confirm("Are you sure?")){
       this.isOpenEditBlock = false;
-      this._vts.Delete(id).subscribe((data) => {this.reload()})
+      this._vts.Delete(id).subscribe((data) => { this._snackBar.open('Done!', 'Ok'); this.reload()})
     }
   }
 

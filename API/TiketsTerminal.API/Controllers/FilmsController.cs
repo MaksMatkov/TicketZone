@@ -44,9 +44,9 @@ namespace TiketsTerminal.API.Controllers
         }
 
         [HttpGet()]
-        public async Task<List<GetFilmLiteResponse>> Get()
+        public async Task<List<GetFilmLiteResponse>> Get(string searchInput = "")
         {
-            var films = await _filmService.GetAsync();
+            var films = await _filmService.GetFilmsWithSearchAsync(searchInput);
 
             return _mapper.Map<List<Film>, List<GetFilmLiteResponse>>(films.ToList());
         }

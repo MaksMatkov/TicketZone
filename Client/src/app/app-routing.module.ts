@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationGuardClientService } from './common/services/authGuardService/authentication-guard-client.service';
 import { AuthenticationGuardAdminService } from './common/services/authGuardService/authentication-guard.service';
+import { AccountComponent } from './components/account/account.component';
 import { AdminControlComponent } from './components/admins/admin-control/admin-control.component';
 import { FilmEditComponent } from './components/admins/filmManager/film-edit/film-edit.component';
 import { FilmViewComponent } from './components/admins/filmManager/film-view/film-view.component';
@@ -12,6 +13,7 @@ import { RoomListComponent } from './components/admins/roomManager/room-list/roo
 import { UsersListComponent } from './components/admins/userManager/users-view/users-list/users-list.component';
 import { FilmsListComponent } from './components/films-list/films-list.component';
 import { LoginComponent } from './components/login-components/login/login.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { ViewFilmComponent } from './components/view-film/view-film.component';
 
@@ -34,7 +36,8 @@ const routes: Routes = [
   ] },
 
   { path: 'film/:id', component: ViewFilmComponent },
-  { path:"orders", component: OrdersComponent, canActivate: [AuthenticationGuardClientService]}
+  { path:"my-account", component: AccountComponent, canActivate: [AuthenticationGuardClientService]},
+  { path: '**', pathMatch: 'full', component:NotFoundComponent}
 ];
 
 @NgModule({

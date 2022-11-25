@@ -1,5 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { AddRoom } from 'src/app/common/models/room/AddRoom';
@@ -18,7 +19,8 @@ export class RoomListComponent implements OnInit {
   dataSource! : MatTableDataSource<Room>;
   selection = new SelectionModel<Room>(true, []);
 
-  constructor(public _rs : RoomService) { }
+  constructor(public _rs : RoomService,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this._rs.GetAll().subscribe(data =>{
@@ -35,7 +37,7 @@ export class RoomListComponent implements OnInit {
 
   onDeleteClick(id : number){
     if(confirm("Are you sure?"))
-      this._rs.Delete(id).subscribe((data) => {this.reload()})
+      this._rs.Delete(id).subscribe((data) => {this._snackBar.open('Room was deleted!', 'Ok'); this.reload()})
   }
 
   isAllSelected() {

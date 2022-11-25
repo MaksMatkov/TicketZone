@@ -22,4 +22,14 @@ export class UserService extends BaseRestService<User, User, AddUser> {
     return this.http.post(this.apiUrl + this.endPoint + `/register`, user).pipe(
       map(res => res));
   }
+
+  public GetInfo() : Observable<User>{
+    return this.http.get(this.apiUrl + this.endPoint + `/getInfo`).pipe(
+      map(res => <User>res));
+  }
+
+  public GetNotApprovedCount() : Observable<number>{
+    return this.http.get(this.apiUrl + this.endPoint + `/notApprovedCount`).pipe(
+      map(res => <number>res));
+  }
 }

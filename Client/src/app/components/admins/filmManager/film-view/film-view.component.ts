@@ -4,6 +4,7 @@ import { FilmLite } from 'src/app/common/models/film/FilmLite';
 import { FilmService } from 'src/app/common/services/filmService/film.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-film-view',
@@ -20,7 +21,8 @@ export class FilmViewComponent implements OnInit {
   dataSource! : MatTableDataSource<FilmLite>;
   selection = new SelectionModel<FilmLite>(true, []);
 
-  constructor(public _fs : FilmService) { }
+  constructor(public _fs : FilmService,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.reload();
@@ -45,7 +47,7 @@ export class FilmViewComponent implements OnInit {
 
   onDeleteClick(id : number){
     if(confirm("Are you sure?"))
-      this._fs.Delete(id).subscribe((data) => {this.reload()})
+      this._fs.Delete(id).subscribe((data) => {this._snackBar.open('Done!', 'Ok'); this.reload()})
   }
 
 

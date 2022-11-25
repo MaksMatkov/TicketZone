@@ -10,6 +10,7 @@ namespace TiketsTerminal.API.DTOs
         public int id { get; set; }
         public string name { get; set; }
         public string email { get; set; }
+        public DateTime lastVisited { get; set; }
         public bool isApproved { get; set; }
     }
 }

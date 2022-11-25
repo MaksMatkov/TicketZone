@@ -106,8 +106,11 @@ table{
 .table-controls{
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
-
 .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
 .mat-checkbox-checked.mat-accent .mat-checkbox-background{
   background-color: #000000 !important;
+}
+.mat-badge-warn .mat-badge-content {
+  transform: scale(0.8) !important;
+  margin-top: 3px !important;
 }

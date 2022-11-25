@@ -3,5 +3,6 @@ export class User {
     public name! : string;
     public email! : string;
     public Password! : string;
+    public lastVisited!: Date;
     public isApproved! :boolean;
 }

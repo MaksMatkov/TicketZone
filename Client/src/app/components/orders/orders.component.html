@@ -1,17 +1,21 @@
 <div class="my-orders-b">
-    <mat-selection-list #filmsGrid [multiple]="false">
-        <mat-list-option class="row" *ngFor="let order of orderList | async" [value]="order.id">
+    <h2>Yur Orders</h2>
+    <mat-selection-list class="scroll" #filmsGrid *ngIf="orderList && orderList.length > 0" [multiple]="false">
+        <mat-list-option class="row" *ngFor="let order of orderList" [value]="order.id">
             <div class="row">
                 <div> {{order.creationDate | date}}</div>
                 <div class="order-row-controls">
-                    <div *ngIf="order.status == status.NeedApprove">In Approve Proc... </div>
-                    <div *ngIf="order.status == status.Approved">Approved </div>
+                    <div style="color:black;" *ngIf="order.status == status.NeedApprove">In Approve Proc... </div>
+                    <div style="color:green;" *ngIf="order.status == status.Approved">Approved </div>
                     <button mat-raised-button (click)="reject(order.id)" *ngIf="order.status != status.Rejected && order.status != status.NeedReject && order.status != status.RejectedDeclined" color="warn">Reject</button>
-                    <div *ngIf="order.status == status.Rejected">Rejected</div>
-                    <div *ngIf="order.status == status.NeedReject">In Reject Proc...</div>
-                    <div *ngIf="order.status == status.RejectedDeclined">Rejected Declined</div>
+                    <div style="color:red;" *ngIf="order.status == status.Rejected">Rejected</div>
+                    <div style="color:rgb(5, 64, 107);" *ngIf="order.status == status.NeedReject">In Reject Proc...</div>
+                    <div *ngIf="order.status == status.RejectedDeclined">Rejected Declined (Approved)</div>
                 </div>
             </div>
         </mat-list-option>
     </mat-selection-list>
+    <div *ngIf="orderList && orderList.length == 0">
+        No Orders
+    </div>
 </div>
