@@ -15,7 +15,9 @@ BACKEND:
 - Clear Architecture
 - JWT Authentication
 - Migrations
-- Using stored 
+- Using stored procedure
+- Middleware
+- Custom errors
 - Connect to SQLite and MSSQL
 - Entity Framework Core
 - Models Configurations
@@ -70,7 +72,7 @@ FRONTEND:
 ## **Questions and Answers**
 <sup>answers for some questions?</sup>
 
-### **I can connect to api due to CORS Policy. How fix?**
+### **I can`t connect to api due to CORS Policy. How fix?**
 You need locate both APIs and clients files on **the same host**;
 
 ### **I haven`t admin account?**
